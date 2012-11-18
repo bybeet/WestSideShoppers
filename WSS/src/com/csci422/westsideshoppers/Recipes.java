@@ -21,6 +21,8 @@ public class Recipes extends ListActivity {
 		super.onCreate(savedInstanceBundle);
 		setContentView(R.layout.activity_recipes);
 		
+		helper = new RecipeHelper(this);
+		
 		initRecipeList();
 	}
 	
@@ -30,7 +32,7 @@ public class Recipes extends ListActivity {
 			recipes.close();
 		}
 		
-		recipes = helper.getAll("name");
+		recipes = helper.getAll();
 		startManagingCursor(recipes);
 		
 		adapter = new RecipeAdapter(recipes);
