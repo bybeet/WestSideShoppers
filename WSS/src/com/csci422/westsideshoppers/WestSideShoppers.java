@@ -16,13 +16,24 @@ public class WestSideShoppers extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_west_side_shoppers);
         
-        Button btn = (Button)findViewById(R.id.buttonRecipes);
-        btn.setOnClickListener(new View.OnClickListener() {
+        // Recipe Button
+        Button recipeButton = (Button)findViewById(R.id.buttonRecipes);
+        recipeButton.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				Intent i = new Intent(WestSideShoppers.this, com.csci422.westsideshoppers.Recipes.class);
 				startActivity(i);
+			}
+		});
+        
+        // Shopping Button
+        Button shoppingButton = (Button)findViewById(R.id.buttonShopping);
+        shoppingButton.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				startActivity(new Intent(WestSideShoppers.this, com.csci422.westsideshoppers.Shopping.class));	
 			}
 		});
         

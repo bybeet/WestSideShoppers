@@ -8,5 +8,6 @@
     <string name="Shopping">shopping</string>
     <string name="recipes">Recipes</string>
     <string name="title_activity_recipes">Recipes</string>
+    <string name="title_activity_shopping">Shopping</string>
 
 </resources>
