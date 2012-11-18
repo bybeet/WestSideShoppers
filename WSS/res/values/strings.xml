@@ -7,5 +7,6 @@
     <string name="calendar">Calendar</string>
     <string name="Shopping">shopping</string>
     <string name="recipes">Recipes</string>
+    <string name="title_activity_recipes">Recipes</string>
 
 </resources>
