@@ -9,5 +9,6 @@
     <string name="recipes">Recipes</string>
     <string name="title_activity_recipes">Recipes</string>
     <string name="add_recipe">Add Recipe</string>
+    <string name="title_activity_shopping">Shopping</string>
 
 </resources>
