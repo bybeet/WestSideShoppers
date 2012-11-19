@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+     
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:width="1000dp"
+        android:height="50dp"
+        android:textSize="20dp"
+        android:typeface="serif"
+        android:textStyle="italic"
+        android:gravity="center"
+        android:text="Recipe Creator"
+         />
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	    xmlns:tools="http://schemas.android.com/tools"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    android:orientation="horizontal" >
+
+	    <TextView 
+	        android:id="@+id/name"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:width="50dp"
+	        android:height="50dp"
+	        android:text="Name: "
+	        />
+	    
+	    <EditText android:id="@+id/edit_message"
+			android:width="250dp"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:hint="Enter Recipe Name" />
+	</LinearLayout>
+    <TextView 
+        android:id="@+id/ingredient_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:width="100dp"
+        android:height="20dp"
+        android:text="Ingredients: "
+        />
+    
+    <AutoCompleteTextView
+        android:id="@+id/ing1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15dp"
+        android:height="20dp"
+        android:width="250dp" 
+        android:paddingLeft="20dp"
+        android:text="Enter Ingredient"
+        />
+    <AutoCompleteTextView
+        android:id="@+id/ing2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15dp"
+        android:height="20dp"
+        android:width="250dp"
+        android:paddingLeft="20dp" 
+        android:text="Enter Ingredient"
+        />
+    <AutoCompleteTextView
+        android:id="@+id/ing3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15dp"
+        android:height="20dp"
+        android:width="250dp" 
+        android:paddingLeft="20dp"
+        android:text="Enter Ingredient"
+        />    
+        
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+Ingredient"
+        android:textSize="15dp"
+        android:onClick="addIngredient" />
+    
+    
+    <TextView 
+        android:id="@+id/time_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:width="100dp"
+        android:height="20dp"
+        android:text="Timers: "
+        />
+    
+	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	    xmlns:tools="http://schemas.android.com/tools"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    android:orientation="horizontal" >
+
+	    <EditText android:id="@+id/timer1"
+			android:width="75dp"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:textSize="15dp"
+	        android:hint="Time" />
+	    
+	    <EditText android:id="@+id/timer1_desc"
+			android:width="250dp"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:textSize="15dp"
+	        android:hint="Action" />
+		</LinearLayout>
+		
+	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	    xmlns:tools="http://schemas.android.com/tools"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    android:orientation="horizontal" >
+
+	    <EditText android:id="@+id/timer2"
+			android:width="75dp"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:textSize="15dp"
+	        android:hint="Time" />
+	    
+	    <EditText android:id="@+id/timer2_desc"
+			android:width="250dp"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:textSize="15dp"
+	        android:hint="Action" />
+		</LinearLayout>
+		
+	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	    xmlns:tools="http://schemas.android.com/tools"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    android:orientation="horizontal" >
+
+	    <EditText android:id="@+id/timer3"
+			android:width="75dp"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:textSize="15dp"
+	        android:hint="Time" />
+	    
+	    <EditText android:id="@+id/timer3_desc"
+			android:width="250dp"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:textSize="15dp"
+	        android:hint="Action" />
+		</LinearLayout>
+		
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+Timer"
+        android:textSize="15dp"
+        android:onClick="addTimer" />
+	   
+    <TextView 
+        android:id="@+id/time_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:width="100dp"
+        android:height="20dp"
+        android:text="Directions: "
+        />
+    
+	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	    xmlns:tools="http://schemas.android.com/tools"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    android:orientation="horizontal" >
+
+	    <TextView 
+			android:width="30dp"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:textSize="15dp"
+	        android:hint="   1)" />
+	    
+	    <EditText android:id="@+id/dir1"
+			android:width="250dp"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:textSize="15dp"
+	        android:hint="Step 1" />
+		</LinearLayout>  
+		
+	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	    xmlns:tools="http://schemas.android.com/tools"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    android:orientation="horizontal" >
+
+	    <TextView 
+			android:width="30dp"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:textSize="15dp"
+	        android:hint="   2)" />
+	    
+	    <EditText android:id="@+id/dir2"
+			android:width="250dp"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:textSize="15dp"
+	        android:hint="Step 2" />
+		</LinearLayout>
+		
+	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	    xmlns:tools="http://schemas.android.com/tools"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    android:orientation="horizontal" >
+
+	    <TextView 
+			android:width="30dp"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:textSize="15dp"
+	        android:hint="   3)" />
+	    
+	    <EditText android:id="@+id/dir3"
+			android:width="250dp"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:textSize="15dp"
+	        android:hint="Step 3" />
+		</LinearLayout>
+		
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+Step"
+        android:textSize="15dp"
+        android:onClick="addStep" />
+    
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ADD RECIPE"
+        android:gravity="center"
+        android:textSize="25dp"
+        android:onClick="addRecipe" />
+    	
+</LinearLayout>
+</ScrollView>

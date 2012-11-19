@@ -32,8 +32,8 @@ public class Recipes extends ListActivity {
 			//Call the add/create recipe screen.
 			@Override
 			public void onClick(View v) {
-				//Intent i = new Intent(this, com.csci422.westsideshoppers.AddRecipe.class);
-				//startActivity(i);
+				Intent i = new Intent(Recipes.this, com.csci422.westsideshoppers.AddRecipe.class);
+				startActivity(i);
 			}
 		});
 		

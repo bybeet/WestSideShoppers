@@ -27,6 +27,8 @@
             android:name=".Shopping"
             android:label="@string/title_activity_shopping">
         </activity>
+        <activity 
+            android:name=".AddRecipe"></activity>
     </application>
 
 </manifest>
