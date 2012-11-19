@@ -1,42 +1,25 @@
 package com.csci422.westsideshoppers;
 
-import android.app.Activity;
+import android.app.TabActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.View;
-import android.widget.Button;
+import android.widget.TabHost;
 
-public class WestSideShoppers extends Activity {
+@SuppressWarnings("deprecation")
+public class WestSideShoppers extends TabActivity {
 
-	
-	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_west_side_shoppers);
         
-        // Recipe Button
-        Button recipeButton = (Button)findViewById(R.id.buttonRecipes);
-        recipeButton.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				Intent i = new Intent(WestSideShoppers.this, com.csci422.westsideshoppers.Recipes.class);
-				startActivity(i);
-			}
-		});
+        // Create tab host
+        TabHost tabHost = getTabHost();
         
-        // Shopping Button
-        Button shoppingButton = (Button)findViewById(R.id.buttonShopping);
-        shoppingButton.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				startActivity(new Intent(WestSideShoppers.this, com.csci422.westsideshoppers.Shopping.class));	
-			}
-		});
-        
+        // Add tabs
+        tabHost.addTab(tabHost.newTabSpec("Shopping").setIndicator("Shopping").setContent(new Intent(this, Shopping.class)));
+        tabHost.addTab(tabHost.newTabSpec("Recipes").setIndicator("Recipes").setContent(new Intent(this, Recipes.class)));
     }
 
     @Override
