@@ -30,8 +30,9 @@
                 android:layout_gravity="center_vertical"
                 android:ellipsize="end"
                 android:maxLines="1"
+                android:layout_marginLeft="20dp"
                 android:text="TextView"
-                android:textSize="25dp" />
+                android:textSize="18dp" />
         </LinearLayout>
     </LinearLayout>
 

@@ -25,8 +25,6 @@ public class AddRecipe extends Activity{
 	EditText ingredient2;
 	EditText ingredient3;
 	EditText direction1;
-	EditText direction2;
-	EditText direction3;
 	
 	RadioGroup buttonType;
 	RadioButton breakfast;
@@ -50,9 +48,7 @@ public class AddRecipe extends Activity{
 		ingredient2 = (EditText)findViewById(R.id.ingredient2);
 		ingredient3 = (EditText)findViewById(R.id.ingredient3);
 		
-		direction1 = (EditText)findViewById(R.id.direction1);
-		direction2 = (EditText)findViewById(R.id.direction2);
-		direction3 = (EditText)findViewById(R.id.direction3);
+		direction1 = (EditText)findViewById(R.id.directions);
 		
 		buttonType = (RadioGroup)findViewById(R.id.buttonGroupType);
 		breakfast = (RadioButton)findViewById(R.id.breakfast);
@@ -94,10 +90,10 @@ public class AddRecipe extends Activity{
 	private void save() {
 		RadioButton b = (RadioButton)findViewById(buttonType.getCheckedRadioButtonId());
 		if(recipeId == null) {
-			helper.insert(recipeName.getText().toString(), b.getText().toString(), ingredient1.getText().toString(), ingredient2.getText().toString(), ingredient3.getText().toString(), direction1.getText().toString(), direction2.getText().toString(), direction3.getText().toString());
+			helper.insert(recipeName.getText().toString(), b.getText().toString(), ingredient1.getText().toString(), ingredient2.getText().toString(), ingredient3.getText().toString(), direction1.getText().toString());
 		}
 		else {
-			helper.update(recipeId, recipeName.getText().toString(), b.getText().toString(), ingredient1.getText().toString(), ingredient2.getText().toString(), ingredient3.getText().toString(), direction1.getText().toString(), direction2.getText().toString(), direction3.getText().toString());			
+			helper.update(recipeId, recipeName.getText().toString(), b.getText().toString(), ingredient1.getText().toString(), ingredient2.getText().toString(), ingredient3.getText().toString(), direction1.getText().toString());			
 		}
 		finish();
 	}
@@ -111,9 +107,7 @@ public class AddRecipe extends Activity{
 		ingredient1.setText(helper.getIngredient(c, 1));
 		ingredient2.setText(helper.getIngredient(c, 2));
 		ingredient3.setText(helper.getIngredient(c, 3));
-		direction1.setText(helper.getDirection(c, 1));
-		direction2.setText(helper.getDirection(c, 2));
-		direction3.setText(helper.getDirection(c, 3));
+		direction1.setText(helper.getDirections(c));
 		
 		String type = helper.getType(c);
 		Log.e("Test", helper.getType(c));

@@ -3,6 +3,7 @@ package com.csci422.westsideshoppers;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -35,7 +36,8 @@ public class SetDateRange extends Activity{
 		Intent result = new Intent();
 		result.putExtra(Shopping.DATE_1, beginDate.getDate());
 		result.putExtra(Shopping.DATE_2, endDate.getDate());
-		setResult(RESULT_OK, result);
-		finish();
+		this.setResult(Activity.RESULT_OK, result);
+		Log.v("SetDateRange", "setIntentData");
+		this.finish();
 	}
 }

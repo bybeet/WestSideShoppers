@@ -17,20 +17,20 @@ class RecipeHelper extends SQLiteOpenHelper {
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-		db.execSQL("CREATE TABLE recipes (_id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, type TEXT, ingredient1 TEXT, ingredient2 TEXT, ingredient3 TEXT, direction1 TEXT, direction2 TEXT, direction3 TEXT);");
+		db.execSQL("CREATE TABLE recipes (_id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, type TEXT, ingredient1 TEXT, ingredient2 TEXT, ingredient3 TEXT, directions TEXT);");
 	}
 
 	public Cursor getAll() {
-		return getReadableDatabase().rawQuery("SELECT _id, name, type, ingredient1, ingredient2, ingredient3 FROM recipes", null);
+		return getReadableDatabase().rawQuery("SELECT _id, name, type, ingredient1, ingredient2, ingredient3 FROM recipes ORDER BY name ASC", null);
 	}
 
 	public Cursor getById(String id) {
 		String[] args = {id};
 
-		return getReadableDatabase().rawQuery("SELECT _id, name, type, ingredient1, ingredient2, ingredient3, direction1, direction2, direction3 FROM recipes WHERE _ID=?", args);
+		return getReadableDatabase().rawQuery("SELECT _id, name, type, ingredient1, ingredient2, ingredient3, directions FROM recipes WHERE _ID=?", args);
 	}
 
-	public void insert(String name, String type, String ingredient1, String ingredient2, String ingredient3, String direction1, String direction2, String direction3) {
+	public void insert(String name, String type, String ingredient1, String ingredient2, String ingredient3, String directions) {
 		ContentValues cv=new ContentValues();
 
 		cv.put("name", name);
@@ -38,14 +38,12 @@ class RecipeHelper extends SQLiteOpenHelper {
 		cv.put("ingredient1", ingredient1);
 		cv.put("ingredient2", ingredient2);
 		cv.put("ingredient3", ingredient3);
-		cv.put("direction1", direction1);
-		cv.put("direction2", direction2);
-		cv.put("direction3", direction3);
+		cv.put("directions", directions);
 
 		getWritableDatabase().insert("recipes", "name", cv);
 	}
 
-	public void update(String id, String name, String type, String ingredient1, String ingredient2, String ingredient3, String direction1, String direction2, String direction3) {
+	public void update(String id, String name, String type, String ingredient1, String ingredient2, String ingredient3, String directions) {
 		ContentValues cv=new ContentValues();
 		String[] args={id};
 
@@ -54,9 +52,8 @@ class RecipeHelper extends SQLiteOpenHelper {
 		cv.put("ingredient1", ingredient1);
 		cv.put("ingredient2", ingredient2);
 		cv.put("ingredient3", ingredient3);
-		cv.put("direction1", direction1);
-		cv.put("direction2", direction2);
-		cv.put("direction3", direction3);
+		cv.put("directions", directions);
+
 		
 		getWritableDatabase().update("recipes", cv, "_ID=?", args);
 	}
@@ -73,8 +70,8 @@ class RecipeHelper extends SQLiteOpenHelper {
 		return c.getString(ingredient+2);
 	}
 	
-	public String getDirection(Cursor c, int direction){
-		return c.getString(direction+5);
+	public String getDirections(Cursor c){
+		return c.getString(6);
 	}
 
 	@Override

@@ -84,30 +84,27 @@
                 android:id="@+id/ingredient1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:height="20dp"
                 android:hint="@string/enter_ingredient"
                 android:paddingLeft="20dp"
-                android:textSize="15dp"
+                android:textSize="20dp"
                 android:width="250dp" />
 
             <AutoCompleteTextView
                 android:id="@+id/ingredient2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:height="20dp"
                 android:hint="@string/enter_ingredient"
                 android:paddingLeft="20dp"
-                android:textSize="15dp"
+                android:textSize="20dp"
                 android:width="250dp" />
 
             <AutoCompleteTextView
                 android:id="@+id/ingredient3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:height="20dp"
                 android:hint="@string/enter_ingredient"
                 android:paddingLeft="20dp"
-                android:textSize="15dp"
+                android:textSize="20dp"
                 android:width="250dp" />
             <!--
     <Button
@@ -213,22 +210,16 @@
                 android:layout_height="fill_parent"
                 android:orientation="horizontal" >
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:hint="   1)"
-                    android:textSize="15dp"
-                    android:width="30dp" />
-
                 <EditText
-                    android:id="@+id/direction1"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/directions"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Step 1"
-                    android:textSize="15dp"
+                    android:hint="Cooking directions."
+                    android:textSize="20dp"
+                    android:minLines="3"
                     android:width="250dp" />
             </LinearLayout>
-
+            <!--
             <LinearLayout
                 xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:tools="http://schemas.android.com/tools"
@@ -274,7 +265,7 @@
                     android:textSize="15dp"
                     android:width="250dp" />
             </LinearLayout>
-            <!--
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

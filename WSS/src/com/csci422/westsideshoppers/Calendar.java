@@ -8,7 +8,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -21,11 +24,31 @@ public class Calendar extends ListActivity {
 	private Cursor calendar;
 	private CalendarHelper helper;
 	private CalendarAdapter adapter;
+	private GestureDetector mGestureDetector;
+	private View mAnotherView;
+	
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_calendar);
+		
+		findViewById(R.id.frameView).setOnTouchListener(new View.OnTouchListener() {
+
+		    @Override
+		    public boolean onTouch(View v, MotionEvent event) {
+		        return mGestureDetector.onTouchEvent(event);
+		    }
+		});
+
+		mGestureDetector = new GestureDetector(this, new GestureDetector.SimpleOnGestureListener() {
+
+		    @Override
+		    public void onLongPress(MotionEvent e) {
+		        // do your tasks here
+		    	Log.v("Caledar", "Long press");
+		    }
+		});
 		
 		helper = new CalendarHelper(this);
 		
@@ -101,4 +124,5 @@ public class Calendar extends ListActivity {
 			
 		}
 	}
+
 }
