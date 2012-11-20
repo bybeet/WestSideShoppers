@@ -34,6 +34,8 @@
         </activity>
         <activity android:name=".AddCalendarMeal" >
         </activity>
+        <activity android:name=".SetDateRange" >
+        </activity>
     </application>
 
 </manifest>
