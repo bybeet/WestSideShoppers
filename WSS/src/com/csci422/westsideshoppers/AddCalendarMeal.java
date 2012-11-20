@@ -10,6 +10,7 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
+import android.widget.CalendarView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -22,6 +23,7 @@ public class AddCalendarMeal extends Activity{
 	private CalendarHelper calHelper;
 	
 	private Spinner spinner;
+	private CalendarView calendar;
 	
 	private boolean somethingSelected;
 	private String recipeName;
@@ -36,6 +38,7 @@ public class AddCalendarMeal extends Activity{
 		recipeHelper = new RecipeHelper(this);
 		calHelper = new  CalendarHelper(this);
 		spinner = (Spinner)findViewById(R.id.spinner);
+		calendar = (CalendarView)findViewById(R.id.calendarView);
 		
 		populateSpinner();
 		
@@ -48,6 +51,8 @@ public class AddCalendarMeal extends Activity{
 					Toast.makeText(AddCalendarMeal.this, "No meal selected.", Toast.LENGTH_SHORT).show();
 				}
 				else{
+					Log.v("Date", "Date is: " + calendar.getDate());
+					calHelper.insert(calendar.getDate(), recipeName);
 					finish();
 				}
 			}

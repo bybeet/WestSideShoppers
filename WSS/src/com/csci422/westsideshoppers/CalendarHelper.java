@@ -17,7 +17,7 @@ public class CalendarHelper extends SQLiteOpenHelper {
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-		db.execSQL("CREATE TABLE calendar (_id INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, recipe TEXT);");
+		db.execSQL("CREATE TABLE calendar (_id INTEGER PRIMARY KEY AUTOINCREMENT, date INTEGER, recipe TEXT);");
 	}
 
 	public Cursor getAll() {
@@ -30,7 +30,7 @@ public class CalendarHelper extends SQLiteOpenHelper {
 		return getReadableDatabase().rawQuery("SELECT _id, date, recipe FROM recipes WHERE _ID=?", args);
 	}
 
-	public void insert(String date, String recipe){
+	public void insert(long date, String recipe){
 		ContentValues cv=new ContentValues();
 
 		cv.put("date", date);
@@ -39,7 +39,7 @@ public class CalendarHelper extends SQLiteOpenHelper {
 		getWritableDatabase().insert("calendar", "date", cv);
 	}
 
-	public void update(String id, String date, String recipe){
+	public void update(String id, long date, String recipe){
 		ContentValues cv=new ContentValues();
 		String[] args={id};
 
@@ -49,8 +49,8 @@ public class CalendarHelper extends SQLiteOpenHelper {
 		getWritableDatabase().update("calendar", cv, "_ID=?", args);
 	}
 
-	public String getDate(Cursor c) {
-		return c.getString(1);
+	public long getDate(Cursor c) {
+		return c.getLong(1);
 	}
 	
 	public String getRecipe(Cursor c){
