@@ -45,10 +45,10 @@ public class AddCalendarMeal extends Activity{
 		startManagingCursor(recipes);
 		
 		String[] columns = {"name", "type"};
-		int[] to = new int[] {android.R.id.text1 , android.R.id.text2};
+		int[] to = new int[] {R.id.recipeName , R.id.mealType};
 		
-		SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, android.R.layout.simple_spinner_item, recipes, columns, to);
-		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, R.layout.row, recipes, columns, to);
+		adapter.setDropDownViewResource(R.layout.row);
 		spinner.setAdapter(adapter);
 	}
 }

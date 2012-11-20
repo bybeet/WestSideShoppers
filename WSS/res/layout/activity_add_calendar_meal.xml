@@ -4,18 +4,17 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="match_parent"
-        android:layout_height="0px"
-        android:layout_weight="1" />
-    
     <CalendarView
         android:id="@+id/calendarView"
         android:layout_width="match_parent"
         android:layout_height="0px"
         android:layout_weight="4" />
-
+    
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_weight="1" />
     
     <Button
         android:id="@+id/addMeal"
