@@ -14,6 +14,6 @@
     <string name="enter_ingredient">Enter Ingredient</string>
     <string name="no_recipe">It doesn\'t look like you\'ve add a recipe.</string>
     <string name="save_recipe">Save Recipe</string>
-    <string name="pick_dates">Pick date range</string>
+    <string name="pick_dates">Pick Date Range</string>
 
 </resources>
