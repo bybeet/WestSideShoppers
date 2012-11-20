@@ -12,6 +12,12 @@
         android:layout_height="78dp"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp" />
+    
+    <TextView
+        android:id="@+id/dateRange"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    
 
     <FrameLayout
         android:layout_width="match_parent"
