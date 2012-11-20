@@ -20,8 +20,8 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:textSize="35dp"
-                android:text="TextView" />
+                android:text="TextView"
+                android:textSize="35dp" />
 
             <TextView
                 android:id="@+id/mealType"
@@ -30,10 +30,9 @@
                 android:layout_gravity="center_vertical"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:textSize="25dp"
-                android:text="TextView" />
+                android:text="TextView"
+                android:textSize="25dp" />
         </LinearLayout>
-
     </LinearLayout>
 
 </LinearLayout>
