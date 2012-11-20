@@ -3,10 +3,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
+
+    <CalendarView
+        android:id="@+id/calendarView1"
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_weight="4" />
     
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-		android:text="temp test" />
+    <Spinner
+        android:id="@+id/spinner1"
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_weight="1" />
+    
+    <Button
+        android:id="@+id/addMeal"
+        android:layout_width="match_parent"
+        android:layout_height="78dp"
+        android:layout_marginTop='30dp'
+        android:layout_marginBottom='30dp'
+        android:text="Add Meal" />
 		
 </LinearLayout>
