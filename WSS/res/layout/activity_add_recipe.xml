@@ -1,87 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" >
-     
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:width="1000dp"
-        android:height="50dp"
-        android:textSize="20dp"
-        android:typeface="serif"
-        android:textStyle="italic"
-        android:gravity="center"
-        android:text="Recipe Creator"
-         />
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	    xmlns:tools="http://schemas.android.com/tools"
-	    android:layout_width="fill_parent"
-	    android:layout_height="fill_parent"
-	    android:orientation="horizontal" >
 
-	    <TextView 
-	        android:id="@+id/name"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:width="50dp"
-	        android:height="50dp"
-	        android:text="Name: "
-	        />
-	    
-	    <EditText android:id="@+id/edit_message"
-			android:width="250dp"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:hint="Enter Recipe Name" />
-	</LinearLayout>
-    <TextView 
-        android:id="@+id/ingredient_list"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:width="100dp"
-        android:height="20dp"
-        android:text="Ingredients: "
-        />
-    
-    <AutoCompleteTextView
-        android:id="@+id/ing1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="15dp"
-        android:height="20dp"
-        android:width="250dp" 
-        android:paddingLeft="20dp"
-        android:text="Enter Ingredient"
-        />
-    <AutoCompleteTextView
-        android:id="@+id/ing2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="15dp"
-        android:height="20dp"
-        android:width="250dp"
-        android:paddingLeft="20dp" 
-        android:text="Enter Ingredient"
-        />
-    <AutoCompleteTextView
-        android:id="@+id/ing3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="15dp"
-        android:height="20dp"
-        android:width="250dp" 
-        android:paddingLeft="20dp"
-        android:text="Enter Ingredient"
-        />    
-        
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/recipeCreatorTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:height="50dp"
+                android:text="Recipe Creator"
+                android:textSize="20dp"
+                android:textStyle="italic"
+                android:typeface="serif"
+                android:width="1000dp" />
+
+            <LinearLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:height="50dp"
+                    android:text="Name: "
+                    android:width="50dp" />
+
+                <EditText
+                    android:id="@+id/recipeName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="Enter Recipe Name"
+                    android:width="250dp" />
+            </LinearLayout>
+
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" 
+                android:id="@+id/buttonGroupType">
+
+                <RadioButton
+                    android:id="@+id/breakfast"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Breakfast" />
+
+                <RadioButton
+                    android:id="@+id/lunch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Lunch" />
+
+                <RadioButton
+                    android:id="@+id/dinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Dinner" />
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/ingredient_list"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:height="20dp"
+                android:text="Ingredients: "
+                android:width="100dp" />
+
+            <AutoCompleteTextView
+                android:id="@+id/ingredient1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:height="20dp"
+                android:hint="@string/enter_ingredient"
+                android:paddingLeft="20dp"
+                android:textSize="15dp"
+                android:width="250dp" />
+
+            <AutoCompleteTextView
+                android:id="@+id/ingredient2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:height="20dp"
+                android:hint="@string/enter_ingredient"
+                android:paddingLeft="20dp"
+                android:textSize="15dp"
+                android:width="250dp" />
+
+            <AutoCompleteTextView
+                android:id="@+id/ingredient3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:height="20dp"
+                android:hint="@string/enter_ingredient"
+                android:paddingLeft="20dp"
+                android:textSize="15dp"
+                android:width="250dp" />
+            <!--
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -89,7 +117,7 @@
         android:textSize="15dp"
         android:onClick="addIngredient" />
     
-    
+
     <TextView 
         android:id="@+id/time_list"
         android:layout_width="wrap_content"
@@ -167,94 +195,103 @@
         android:layout_height="wrap_content"
         android:text="+Timer"
         android:textSize="15dp"
-        android:onClick="addTimer" />
-	   
-    <TextView 
-        android:id="@+id/time_list"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:width="100dp"
-        android:height="20dp"
-        android:text="Directions: "
-        />
-    
-	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	    xmlns:tools="http://schemas.android.com/tools"
-	    android:layout_width="fill_parent"
-	    android:layout_height="fill_parent"
-	    android:orientation="horizontal" >
+        android:onClick="addTimer" />
+            -->
 
-	    <TextView 
-			android:width="30dp"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:textSize="15dp"
-	        android:hint="   1)" />
-	    
-	    <EditText android:id="@+id/dir1"
-			android:width="250dp"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:textSize="15dp"
-	        android:hint="Step 1" />
-		</LinearLayout>  
-		
-	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	    xmlns:tools="http://schemas.android.com/tools"
-	    android:layout_width="fill_parent"
-	    android:layout_height="fill_parent"
-	    android:orientation="horizontal" >
+            <TextView
+                android:id="@+id/time_list"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:height="20dp"
+                android:text="Directions: "
+                android:width="100dp" />
 
-	    <TextView 
-			android:width="30dp"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:textSize="15dp"
-	        android:hint="   2)" />
-	    
-	    <EditText android:id="@+id/dir2"
-			android:width="250dp"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:textSize="15dp"
-	        android:hint="Step 2" />
-		</LinearLayout>
-		
-	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	    xmlns:tools="http://schemas.android.com/tools"
-	    android:layout_width="fill_parent"
-	    android:layout_height="fill_parent"
-	    android:orientation="horizontal" >
+            <LinearLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="horizontal" >
 
-	    <TextView 
-			android:width="30dp"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:textSize="15dp"
-	        android:hint="   3)" />
-	    
-	    <EditText android:id="@+id/dir3"
-			android:width="250dp"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:textSize="15dp"
-	        android:hint="Step 3" />
-		</LinearLayout>
-		
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="   1)"
+                    android:textSize="15dp"
+                    android:width="30dp" />
+
+                <EditText
+                    android:id="@+id/direction1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="Step 1"
+                    android:textSize="15dp"
+                    android:width="250dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="   2)"
+                    android:textSize="15dp"
+                    android:width="30dp" />
+
+                <EditText
+                    android:id="@+id/direction2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="Step 2"
+                    android:textSize="15dp"
+                    android:width="250dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="   3)"
+                    android:textSize="15dp"
+                    android:width="30dp" />
+
+                <EditText
+                    android:id="@+id/direction3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="Step 3"
+                    android:textSize="15dp"
+                    android:width="250dp" />
+            </LinearLayout>
+            <!--
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="+Step"
         android:textSize="15dp"
-        android:onClick="addStep" />
-    
+        android:onClick="addStep" />
+            -->
+
+        </LinearLayout>
+    </ScrollView>
+
     <Button
-        android:layout_width="wrap_content"
+        android:id="@+id/addRecipe"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="ADD RECIPE"
         android:gravity="center"
-        android:textSize="25dp"
-        android:onClick="addRecipe" />
-    	
+        android:text="@string/save_recipe"
+        android:textSize="25dp" />
+
 </LinearLayout>
-</ScrollView>

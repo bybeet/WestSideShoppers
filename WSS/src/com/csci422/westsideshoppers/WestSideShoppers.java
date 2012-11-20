@@ -18,9 +18,10 @@ public class WestSideShoppers extends TabActivity {
         TabHost tabHost = getTabHost();
         
         // Add tabs
+        tabHost.addTab(tabHost.newTabSpec("Calendar").setIndicator("Calendar").setContent(new Intent(this, Calendar.class)));
         tabHost.addTab(tabHost.newTabSpec("Shopping").setIndicator("Shopping").setContent(new Intent(this, Shopping.class)));
         tabHost.addTab(tabHost.newTabSpec("Recipes").setIndicator("Recipes").setContent(new Intent(this, Recipes.class)));
-        tabHost.addTab(tabHost.newTabSpec("Calendar").setIndicator("Calendar").setContent(new Intent(this, Calendar.class)));
+
     }
 
     @Override

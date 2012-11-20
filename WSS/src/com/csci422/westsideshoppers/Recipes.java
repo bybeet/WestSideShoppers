@@ -5,15 +5,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CursorAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 public class Recipes extends ListActivity {
+	
+	public final static String ID_EXTRA = "com.csci422.westsideshoppers._ID";
 	
 	private Cursor recipes;
 	private RecipeHelper helper;
@@ -40,6 +44,20 @@ public class Recipes extends ListActivity {
 		initRecipeList();
 	}
 	
+	@Override
+	public void onDestroy () {
+		super.onDestroy();
+		helper.close();
+	}
+	
+	@Override
+	public void onListItemClick(ListView list, View view, int position, long id) {
+		Intent intent = new Intent(Recipes.this, AddRecipe.class);
+		intent.putExtra(ID_EXTRA, String.valueOf(id));
+		startActivity(intent);
+	}
+	
+	@SuppressWarnings("deprecation")
 	private void initRecipeList(){
 		if(recipes != null){
 			stopManagingCursor(recipes);
@@ -76,13 +94,18 @@ public class Recipes extends ListActivity {
 	
 	static class RecipeHolder {
 		private TextView name;
+		private TextView mealType;
 		
 		RecipeHolder (View row){
 			name = (TextView)row.findViewById(R.id.recipeName);
+			mealType = (TextView)row.findViewById(R.id.mealType);
 		}
 		
 		void populateFrom(Cursor c, RecipeHelper helper){
+			mealType.setText(helper.getType(c));
 			name.setText(helper.getName(c));
+			//Log.e("Recipe List", helper.getType(c));
+			
 		}
 	}
 	
