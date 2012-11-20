@@ -1,5 +1,8 @@
 package com.csci422.westsideshoppers;
 
+import android.app.Activity;
+import android.os.Bundle;
+
 public class AddCalendarMeal extends Activity{
 	
 	@Override
