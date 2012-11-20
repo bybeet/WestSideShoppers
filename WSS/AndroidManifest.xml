@@ -16,19 +16,22 @@
             android:label="@string/title_activity_west_side_shoppers" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".Recipes"
-            android:label="@string/title_activity_recipes">
+            android:label="@string/title_activity_recipes" >
         </activity>
         <activity
             android:name=".Shopping"
-            android:label="@string/title_activity_shopping">
+            android:label="@string/title_activity_shopping" >
         </activity>
-        <activity 
-            android:name=".AddRecipe"></activity>
+        <activity android:name=".AddRecipe" >
+        </activity>
+        <activity android:name=".Calendar" >
+        </activity>
     </application>
 
 </manifest>
