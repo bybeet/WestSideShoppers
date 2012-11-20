@@ -12,15 +12,18 @@ import android.widget.Button;
 
 public class Shopping extends Activity {
 	
+	public static String DATE_1 = "com.csci422.date1";
+	public static String DATE_2 = "com.csci442.date2";
+	
+	long beginDate;
+	long endDate;
+	
 	private Cursor recipe;
 	private Cursor calendar;
 	
 	private RecipeHelper recipeHelper;
 	private CalendarHelper calHelper;
-	
-	private Date beginDate;
-	private Date endDate;
-	
+
 	@Override
 	public void onCreate(Bundle savedInstanceBundle){
 		super.onCreate(savedInstanceBundle);
@@ -31,12 +34,18 @@ public class Shopping extends Activity {
 		
 			@Override
 			public void onClick(View view){
-				Intent i = new Intent(Shopping.this, SetDateRange.class);
-				startActivity(i);
+				Intent i = new Intent(Shopping.this, SetDateRange.class);				
+				startActivityForResult(i, Activity.RESULT_OK);
 			}
 			
 		});
 		
 		
+	}
+	
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data){
+		super.onActivityResult(requestCode, resultCode, data);
+		//beginDate = data.getExtra(DATE_1);
 	}
 }

@@ -3,6 +3,44 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-    
 
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/begin_date"
+        android:textSize="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp" />
+
+    <CalendarView
+        android:id="@+id/beginDate"
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_weight="2" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_height="wrap_content"
+        android:text="@string/end_date"
+        android:layout_marginLeft="20dp"
+        android:textSize="20dp" />
+
+    <CalendarView
+        android:id="@+id/endDate"
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_weight="2" />
+
+    <Button
+        android:id="@+id/setDateButton"
+        android:layout_width="match_parent"
+    	android:text="Set date range"
+        android:layout_height="78dp"
+        android:layout_weight="0.5"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp" />
+    
 </LinearLayout>
