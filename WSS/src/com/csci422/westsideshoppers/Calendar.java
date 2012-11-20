@@ -16,8 +16,6 @@ import android.widget.Button;
 import android.widget.CursorAdapter;
 import android.widget.TextView;
 
-import com.csci422.westsideshoppers.Recipes.RecipeHolder;
-
 public class Calendar extends ListActivity {
 	
 	private Cursor calendar;
@@ -40,6 +38,8 @@ public class Calendar extends ListActivity {
 				startActivity(i);
 			}
 		});
+		
+		initCalendarList();
 	}
 	
 	@Override
@@ -49,7 +49,7 @@ public class Calendar extends ListActivity {
 	}
 	
 	@SuppressWarnings("deprecation")
-	private void initRecipeList(){
+	private void initCalendarList(){
 		if(calendar != null){
 			stopManagingCursor(calendar);
 			calendar.close();
@@ -77,7 +77,7 @@ public class Calendar extends ListActivity {
 		public View newView(Context ctxt, Cursor c, ViewGroup parent){
 			LayoutInflater inflater = getLayoutInflater();
 			View row = inflater.inflate(R.layout.row, parent, false);
-			RecipeHolder holder = new RecipeHolder(row);
+			CalendarHolder holder = new CalendarHolder(row);
 			row.setTag(holder);
 			return row;
 		}
@@ -94,7 +94,7 @@ public class Calendar extends ListActivity {
 		
 		void populateFrom(Cursor c, CalendarHelper helper){
 			Date df = new java.util.Date(helper.getDate(c));
-			String date = new SimpleDateFormat("MM dd").format(df);
+			String date = new SimpleDateFormat("EEEE, MM/dd").format(df);
 			mealType.setText(date);
 			name.setText(helper.getRecipe(c));
 			//Log.e("Recipe List", helper.getType(c));

@@ -21,13 +21,13 @@ public class CalendarHelper extends SQLiteOpenHelper {
 	}
 
 	public Cursor getAll() {
-		return getReadableDatabase().rawQuery("SELECT _id, date, recipe FROM recipes", null);
+		return getReadableDatabase().rawQuery("SELECT _id, date, recipe FROM calendar ORDER BY date ASC", null);
 	}
 
 	public Cursor getById(String id) {
 		String[] args = {id};
 
-		return getReadableDatabase().rawQuery("SELECT _id, date, recipe FROM recipes WHERE _ID=?", args);
+		return getReadableDatabase().rawQuery("SELECT _id, date, recipe FROM calendar WHERE _ID=?", args);
 	}
 
 	public void insert(long date, String recipe){
