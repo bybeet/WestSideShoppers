@@ -3,15 +3,13 @@ package com.csci422.westsideshoppers;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import android.app.ListActivity;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -19,7 +17,7 @@ import android.widget.Button;
 import android.widget.CursorAdapter;
 import android.widget.TextView;
 
-public class Calendar extends ListActivity {
+public class Calendar extends Activity {
 	
 	private Cursor calendar;
 	private CalendarHelper helper;
@@ -50,6 +48,16 @@ public class Calendar extends ListActivity {
 		    }
 		});*/
 		
+		Button btn = (Button)findViewById(R.id.addMeal);
+		btn.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(Calendar.this, AddCalendarMeal.class);
+				startActivity(i);
+			}
+		});
+		
 		helper = new CalendarHelper(this);
 		
 		initCalendarList();
@@ -69,10 +77,12 @@ public class Calendar extends ListActivity {
 		}
 		
 		calendar = helper.getAll();
+
 		startManagingCursor(calendar);
-		
 		adapter = new CalendarAdapter(calendar);
-		setListAdapter(adapter);
+
+		//setListAdapter(adapter);
+
 	}
 	
 	class CalendarAdapter extends CursorAdapter {
@@ -110,7 +120,6 @@ public class Calendar extends ListActivity {
 			String date = new SimpleDateFormat("EEEE, MM/dd").format(df);
 			mealType.setText(date);
 			name.setText(helper.getRecipe(c));
-			//Log.e("Recipe List", helper.getType(c));
 			
 		}
 	}

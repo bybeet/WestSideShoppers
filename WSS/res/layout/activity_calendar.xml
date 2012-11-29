@@ -4,19 +4,18 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
+    <Button
+        android:id="@+id/addMeal"
+        android:layout_width="wrap_content"
         android:layout_height="0px"
         android:layout_weight="1"
-        android:orientation="vertical" >
+        android:title="MENALS" />
 
-        <CalendarView
-            android:id="@+id/calendarView"
-            android:layout_width="match_parent"
-            android:showWeekNumber="false"
-            android:layout_height="match_parent" />
-    </LinearLayout>
+    <CalendarView
+        android:id="@+id/calendarMealView"
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_weight="1"/>
 
     <FrameLayout
         android:id="@+id/frameView"
