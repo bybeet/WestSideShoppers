@@ -32,8 +32,8 @@ public class Calendar extends ListActivity {
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_calendar);
-		
-		findViewById(R.id.frameView).setOnTouchListener(new View.OnTouchListener() {
+
+/*		findViewById(R.id.frameView).setOnTouchListener(new View.OnTouchListener() {
 
 		    @Override
 		    public boolean onTouch(View v, MotionEvent event) {
@@ -48,19 +48,9 @@ public class Calendar extends ListActivity {
 		        // do your tasks here
 		    	Log.v("Caledar", "Long press");
 		    }
-		});
+		});*/
 		
 		helper = new CalendarHelper(this);
-		
-		Button btn = (Button)findViewById(R.id.addMeal);
-		btn.setOnClickListener(new OnClickListener(){
-
-			@Override
-			public void onClick(View v) {
-				Intent i = new Intent(Calendar.this, AddCalendarMeal.class);
-				startActivity(i);
-			}
-		});
 		
 		initCalendarList();
 	}
