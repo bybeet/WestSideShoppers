@@ -69,7 +69,8 @@ public class Calendar extends Activity {
 			@Override
 			public void onClick(View v) {
 				Intent i = new Intent(Calendar.this, AddCalendarMeal.class);
-				i.putExtra(DATE_ID, calendar.getDate());
+				
+				i.putExtra(DATE_ID, "" + calendar.getDate());
 				startActivity(i);
 			}
 		});
