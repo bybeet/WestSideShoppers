@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-<!-- 
+
     <Button
         android:id="@+id/addMeal"
         android:layout_width="match_parent"
@@ -18,12 +18,11 @@
         android:layout_height="0px"
         android:layout_weight="1"
         android:showWeekNumber="false" />
- -->
 
     <ListView
         android:id="@+id/list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0px"
         android:layout_weight="1" />
 
 </LinearLayout>

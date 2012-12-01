@@ -1,22 +1,26 @@
 package com.csci422.westsideshoppers;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.widget.CursorAdapter;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.CalendarView;
+import android.widget.CalendarView.OnDateChangeListener;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class Calendar extends Activity {
 
@@ -37,7 +41,6 @@ public class Calendar extends Activity {
 		LinearLayout layout = (LinearLayout)findViewById(R.id.calendar_layout);
 		helper = new  RecipeHelper(this);
 
-		/*
 		calendar = (CalendarView)layout.findViewById(R.id.calendarMealView);
 		btn = (Button)layout.findViewById(R.id.addMeal);
 		btn.append(" " + returnStringDate());
@@ -61,7 +64,6 @@ public class Calendar extends Activity {
 			}
 
 		});
-		 */
 
 		list = (ListView)findViewById(R.id.list);
 
@@ -95,6 +97,12 @@ public class Calendar extends Activity {
 		/*
 		Log.e("Calendar", "ListView Adapter = " + list.getAdapter());
 		 */
+	}
+	
+	private String returnStringDate(){
+		Date df = new java.util.Date(calendar.getDate());
+		String date = new SimpleDateFormat("EEEE, MM/dd").format(df);
+		return date;
 	}
 
 	class RecipeAdapter extends CursorAdapter {
@@ -139,11 +147,7 @@ public class Calendar extends Activity {
 /*
 
 
-	private String returnStringDate(){
-		Date df = new java.util.Date(calendar.getDate());
-		String date = new SimpleDateFormat("EEEE, MM/dd").format(df);
-		return date;
-	}
+	
 
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) {
