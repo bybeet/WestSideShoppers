@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/recipe_create_layout"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" >
@@ -47,11 +48,11 @@
                     android:hint="Enter Recipe Name"
                     android:width="250dp" />
             </LinearLayout>
-
+
             <RadioGroup
+                android:id="@+id/buttonGroupType"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" 
-                android:id="@+id/buttonGroupType">
+                android:layout_height="wrap_content" >
 
                 <RadioButton
                     android:id="@+id/breakfast"
@@ -106,94 +107,6 @@
                 android:paddingLeft="20dp"
                 android:textSize="20dp"
                 android:width="250dp" />
-            <!--
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="+Ingredient"
-        android:textSize="15dp"
-        android:onClick="addIngredient" />
-    
-
-    <TextView 
-        android:id="@+id/time_list"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:width="100dp"
-        android:height="20dp"
-        android:text="Timers: "
-        />
-    
-	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	    xmlns:tools="http://schemas.android.com/tools"
-	    android:layout_width="fill_parent"
-	    android:layout_height="fill_parent"
-	    android:orientation="horizontal" >
-
-	    <EditText android:id="@+id/timer1"
-			android:width="75dp"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:textSize="15dp"
-	        android:hint="Time" />
-	    
-	    <EditText android:id="@+id/timer1_desc"
-			android:width="250dp"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:textSize="15dp"
-	        android:hint="Action" />
-		</LinearLayout>
-		
-	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	    xmlns:tools="http://schemas.android.com/tools"
-	    android:layout_width="fill_parent"
-	    android:layout_height="fill_parent"
-	    android:orientation="horizontal" >
-
-	    <EditText android:id="@+id/timer2"
-			android:width="75dp"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:textSize="15dp"
-	        android:hint="Time" />
-	    
-	    <EditText android:id="@+id/timer2_desc"
-			android:width="250dp"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:textSize="15dp"
-	        android:hint="Action" />
-		</LinearLayout>
-		
-	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	    xmlns:tools="http://schemas.android.com/tools"
-	    android:layout_width="fill_parent"
-	    android:layout_height="fill_parent"
-	    android:orientation="horizontal" >
-
-	    <EditText android:id="@+id/timer3"
-			android:width="75dp"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:textSize="15dp"
-	        android:hint="Time" />
-	    
-	    <EditText android:id="@+id/timer3_desc"
-			android:width="250dp"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:textSize="15dp"
-	        android:hint="Action" />
-		</LinearLayout>
-		
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="+Timer"
-        android:textSize="15dp"
-        android:onClick="addTimer" />
-            -->
 
             <TextView
                 android:id="@+id/time_list"
@@ -215,64 +128,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Cooking directions."
-                    android:textSize="20dp"
                     android:minLines="3"
+                    android:textSize="20dp"
                     android:width="250dp" />
             </LinearLayout>
-            <!--
-            <LinearLayout
-                xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:orientation="horizontal" >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:hint="   2)"
-                    android:textSize="15dp"
-                    android:width="30dp" />
-
-                <EditText
-                    android:id="@+id/direction2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:hint="Step 2"
-                    android:textSize="15dp"
-                    android:width="250dp" />
-            </LinearLayout>
-
-            <LinearLayout
-                xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:orientation="horizontal" >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:hint="   3)"
-                    android:textSize="15dp"
-                    android:width="30dp" />
-
-                <EditText
-                    android:id="@+id/direction3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:hint="Step 3"
-                    android:textSize="15dp"
-                    android:width="250dp" />
-            </LinearLayout>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="+Step"
-        android:textSize="15dp"
-        android:onClick="addStep" />
-            -->
 
         </LinearLayout>
     </ScrollView>

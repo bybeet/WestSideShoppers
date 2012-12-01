@@ -17,5 +17,8 @@
     <string name="pick_dates">Pick Date Range</string>
     <string name="end_date">End Date</string>
     <string name="begin_date">Begin Date</string>
+    <string name="save_edited_recipe">Save Edited Recipe</string>
+    <string name="edit_recipe">Edit Recipe</string>
+    <string name="cancel_edit_recipe">Press the back button to undo modifications to the recipe.</string>
 
 </resources>

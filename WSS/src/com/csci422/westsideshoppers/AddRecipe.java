@@ -9,6 +9,7 @@ import android.view.View.OnClickListener;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -54,18 +55,25 @@ public class AddRecipe extends Activity{
 		breakfast = (RadioButton)findViewById(R.id.breakfast);
 		lunch = (RadioButton)findViewById(R.id.lunch);
 		dinner = (RadioButton)findViewById(R.id.dinner);
+		
+		Button btn = (Button)findViewById(R.id.addRecipe);
 
 		//Check to see if the recipe already exists, if so, then load the data into the form.
 		recipeId = getIntent().getStringExtra(Recipes.ID_EXTRA);
 		if(recipeId != null){
-			title.setText("Recipe Editor");
+			title.setText(R.string.edit_recipe);
+			btn.setText(R.string.save_edited_recipe);
+			TextView cancelSave = new TextView(this);
+			cancelSave.setText(R.string.cancel_edit_recipe);
+			LinearLayout linearLayout = (LinearLayout)findViewById(R.id.recipe_create_layout);
+			linearLayout.addView(cancelSave);
 			load();
 		}
 		else{
 			breakfast.setChecked(true);
 		}
 
-		Button btn = (Button)findViewById(R.id.addRecipe);
+		
 		btn.setOnClickListener(new OnClickListener(){
 
 			@Override
