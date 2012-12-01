@@ -1,28 +1,18 @@
 package com.csci422.westsideshoppers;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.GestureDetector;
+import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.CalendarView;
-import android.widget.CalendarView.OnDateChangeListener;
-import android.widget.CursorAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
@@ -32,66 +22,135 @@ public class Calendar extends Activity {
 
 	private Cursor cursor;
 	private RecipeHelper helper;
-	private GestureDetector mGestureDetector;
-	private View mAnotherView;
 	private CalendarView calendar;
+	private RecipeAdapter adapter;
 	private Button btn;
-	private CalendarHelper calHelper;
 	private ListView list;
-	
+
 	public final static String DATE_ID = "com.csci422.westsideshoppers_DATE";
 
 	@Override
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_calendar);
-	
+
+		LinearLayout layout = (LinearLayout)findViewById(R.id.calendar_layout);
 		helper = new  RecipeHelper(this);
-		list = (ListView)findViewById(android.R.id.list);
-		
-		calendar = (CalendarView)findViewById(R.id.calendarMealView);
+
 		/*
-		btn = (Button)findViewById(R.id.addMeal);
+		calendar = (CalendarView)layout.findViewById(R.id.calendarMealView);
+		btn = (Button)layout.findViewById(R.id.addMeal);
 		btn.append(" " + returnStringDate());
 		btn.setOnClickListener(new OnClickListener(){
 
 			@Override
 			public void onClick(View v) {
 				Intent i = new Intent(Calendar.this, AddCalendarMeal.class);
-				
+
 				i.putExtra(DATE_ID, "" + calendar.getDate());
 				startActivity(i);
 			}
 		});
-		*/
 		calendar.setOnDateChangeListener(new OnDateChangeListener() {
 
 			@Override
 			public void onSelectedDayChange(CalendarView view, int year, int month,
 					int dayOfMonth) {
 				Log.v("Calendar", ""+dayOfMonth);
-				btn.setText("Add Meal for " + returnStringDate());
-				updateMealList();
-
+				//btn.setText("Add Meal for " + returnStringDate());
 			}
 
 		});
-		
+		 */
+
+		list = (ListView)findViewById(R.id.list);
+
 		initCalendarList();
 	}
-	
+
+	@Override
+	public void onDestroy(){
+		super.onDestroy();
+		helper.close();
+	}
+
+	@SuppressWarnings("deprecation")
+	private void initCalendarList(){
+		if(cursor != null){
+			stopManagingCursor(cursor);
+			cursor.close();
+		}
+
+		cursor = helper.getAll();
+		startManagingCursor(cursor);
+
+		String[] from = new String[] {"name", "type"};
+		int[] to = new int[] {R.id.recipeName, R.id.mealType};
+		SimpleCursorAdapter mAdapter = new SimpleCursorAdapter(this, R.layout.row, cursor, from, to);
+
+		adapter = new RecipeAdapter(cursor);
+
+		list.setAdapter(mAdapter);
+
+		/*
+		Log.e("Calendar", "ListView Adapter = " + list.getAdapter());
+		 */
+	}
+
+	class RecipeAdapter extends CursorAdapter {
+		RecipeAdapter(Cursor c){
+			super(Calendar.this, c);
+		}
+
+		@Override
+		public void bindView(View row, Context ctxt, Cursor c) {
+			RecipeHolder holder = (RecipeHolder)row.getTag();
+			holder.populateFrom(c, helper);
+		}
+
+		@Override
+		public View newView(Context ctxt, Cursor c, ViewGroup parent){
+			LayoutInflater inflater = getLayoutInflater();
+			View row = inflater.inflate(R.layout.row, parent, false);
+			RecipeHolder holder = new RecipeHolder(row);
+			row.setTag(holder);
+			return row;
+		}
+	}
+
+	static class RecipeHolder {
+		private TextView name;
+		private TextView mealType;
+
+		RecipeHolder (View row){
+			name = (TextView)row.findViewById(R.id.recipeName);
+			mealType = (TextView)row.findViewById(R.id.mealType);
+		}
+
+		void populateFrom(Cursor c, RecipeHelper helper){
+			mealType.setText(helper.getType(c));
+			name.setText(helper.getName(c));
+			//Log.e("Recipe List", helper.getType(c));
+
+		}
+	}
+}
+
+/*
+
+
 	private String returnStringDate(){
 		Date df = new java.util.Date(calendar.getDate());
 		String date = new SimpleDateFormat("EEEE, MM/dd").format(df);
 		return date;
 	}
-	
+
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) {
 		super.onPrepareOptionsMenu(menu);
 		return true;
 	}
-	
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 	    if (getParent() != null) 
@@ -114,37 +173,12 @@ public class Calendar extends Activity {
 
 	}
 
-	@Override
-	public void onDestroy(){
-		super.onDestroy();
-		helper.close();
-	}
-	
-	private void updateMealList(){
-		
-	}
+list.setOnItemClickListener( new OnItemClickListener() {
 
-	@SuppressWarnings("deprecation")
-	private void initCalendarList(){
-		if(cursor != null){
-			stopManagingCursor(cursor);
-			cursor.close();
-		}
-		cursor = helper.getAll();
-		startManagingCursor(cursor);
-
-		String[] from = new String[] {"name", "type"};
-	    int[] to = new int[] {R.id.recipeName, R.id.mealType};
-		
-		SimpleCursorAdapter testAdapter = new SimpleCursorAdapter(this, R.layout.row, cursor, from, to);
-		list.setAdapter(testAdapter);
-		Log.e("Calendar", "ListView Adapter = " + list.getAdapter());
-		list.setOnItemClickListener( new OnItemClickListener() {
-		
 			@Override
 			public void onItemClick(AdapterView<?> a, View v, int position, long id){
 				Toast.makeText(getBaseContext(), "Click", Toast.LENGTH_LONG).show();
 			}
 		});
-	}
-}
+
+ */
