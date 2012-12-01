@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-
+<!-- 
     <Button
         android:id="@+id/addMeal"
         android:layout_width="match_parent"
@@ -11,7 +11,7 @@
         android:layout_marginBottom="20dp"
         android:layout_marginTop="20dp"
         android:text="Add Meal" />
-
+ -->
     <CalendarView
         android:id="@+id/calendarMealView"
         android:layout_width="match_parent"
@@ -19,17 +19,11 @@
         android:layout_weight="1"
         android:showWeekNumber="false" />
 
-    <FrameLayout
-        android:id="@+id/frameView"
+    <ListView
+        android:id="@android:id/list"
         android:layout_width="match_parent"
         android:layout_height="0px"
-        android:layout_weight="1" >
-
-        <ListView
-            android:id="@android:id/list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" >
-        </ListView>
-    </FrameLayout>
+        android:layout_weight="1">
+    </ListView>
 
 </LinearLayout>
