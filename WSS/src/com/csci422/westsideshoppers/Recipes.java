@@ -1,15 +1,18 @@
 package com.csci422.westsideshoppers;
 
+import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.Button;
 import android.widget.CursorAdapter;
 import android.widget.ListView;
@@ -38,6 +41,36 @@ public class Recipes extends ListActivity {
 			public void onClick(View v) {
 				Intent i = new Intent(Recipes.this, com.csci422.westsideshoppers.AddRecipe.class);
 				startActivity(i);
+			}
+		});
+		
+		ListView lv = getListView();
+		lv.setOnItemLongClickListener(new OnItemLongClickListener(){
+
+			@Override
+			public boolean onItemLongClick(AdapterView<?> arg0, View view, int position, long id) {
+				AlertDialog.Builder diag = new AlertDialog.Builder(Recipes.this);
+				final long test = id;
+				diag.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						helper.delete(String.valueOf(test));
+						initRecipeList();
+					}
+				})
+				.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						
+					}
+				})
+				.setCancelable(true)
+				.show();
+
+				return true;
+
 			}
 		});
 		
@@ -108,6 +141,5 @@ public class Recipes extends ListActivity {
 			
 		}
 	}
-	
-	
+
 }

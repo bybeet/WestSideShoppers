@@ -79,4 +79,8 @@ class RecipeHelper extends SQLiteOpenHelper {
 		//Nothing to do here, on db scheme 1
 	}
 
+	public void delete(String id) {
+		getWritableDatabase().delete("recipes", "_id" + "=" + id,null);		
+	}
+
 }
