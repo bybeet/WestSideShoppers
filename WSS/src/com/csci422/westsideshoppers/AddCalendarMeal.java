@@ -90,7 +90,7 @@ public class AddCalendarMeal extends ListActivity{
 	@Override
 	public void onListItemClick(ListView list, View view, int position, long id) {
 		System.out.println(date);
-		calHelper.insert(Long.parseLong(date), String.valueOf(id));
+		calHelper.insert(date, String.valueOf(id));
 		finish();
 	}
 	

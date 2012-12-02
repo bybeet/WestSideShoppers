@@ -52,7 +52,7 @@ public class Calendar extends Activity {
 			public void onClick(View v) {
 				Intent i = new Intent(Calendar.this, AddCalendarMeal.class);
 
-				i.putExtra(DATE_ID, "" + calendar.getDate());
+				i.putExtra(DATE_ID, currentDate());
 				startActivity(i);
 			}
 		});
@@ -62,8 +62,9 @@ public class Calendar extends Activity {
 			@Override
 			public void onSelectedDayChange(CalendarView view, int year, int month,
 					int dayOfMonth) {
-				Log.v("Calendar", ""+dayOfMonth);
-				//btn.setText("Add Meal for " + returnStringDate());
+				btn.setText("Add Meal for " + returnStringDate());
+				
+				initCalendarList();
 			}
 
 		});
@@ -101,7 +102,7 @@ public class Calendar extends Activity {
 		initCalendarList();
 
 	}
-
+	
 	@Override
 	public void onDestroy(){
 		super.onDestroy();
@@ -115,7 +116,7 @@ public class Calendar extends Activity {
 			cursor.close();
 		}
 
-		cursor = calHelper.getAll();
+		cursor = calHelper.getByDate(currentDate());
 		startManagingCursor(cursor);
 
 		String[] from = new String[] {"date", "recipe"};
@@ -133,6 +134,11 @@ public class Calendar extends Activity {
 		Date df = new java.util.Date(calendar.getDate());
 		String date = new SimpleDateFormat("EEEE, MM/dd").format(df);
 		return date;
+	}
+	
+	private String currentDate(){
+		Date df = new Date(calendar.getDate());
+		return new SimpleDateFormat("MM/dd/yy").format(df);
 	}
 
 }
