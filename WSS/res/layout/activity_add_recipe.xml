@@ -49,29 +49,23 @@
                     android:width="250dp" />
             </LinearLayout>
 
-            <RadioGroup
-                android:id="@+id/buttonGroupType"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" >
-
-                <RadioButton
+                <CheckBox
                     android:id="@+id/breakfast"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Breakfast" />
 
-                <RadioButton
+                <CheckBox
                     android:id="@+id/lunch"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Lunch" />
 
-                <RadioButton
+                <CheckBox
                     android:id="@+id/dinner"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Dinner" />
-            </RadioGroup>
 
             <TextView
                 android:id="@+id/ingredient_list"

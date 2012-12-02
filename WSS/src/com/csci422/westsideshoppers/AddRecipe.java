@@ -1,6 +1,8 @@
 package com.csci422.westsideshoppers;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,10 +10,9 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,17 +21,16 @@ public class AddRecipe extends Activity{
 	RecipeHelper helper;
 
 	TextView title;
-	
+
 	EditText recipeName;
 	EditText ingredient1;
 	EditText ingredient2;
 	EditText ingredient3;
 	EditText direction1;
-	
-	RadioGroup buttonType;
-	RadioButton breakfast;
-	RadioButton lunch;
-	RadioButton dinner;
+
+	CheckBox breakfast;
+	CheckBox lunch;
+	CheckBox dinner;
 
 	String recipeId;
 
@@ -42,20 +42,19 @@ public class AddRecipe extends Activity{
 		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
 		helper = new RecipeHelper(this);
-		
+
 		title = (TextView)findViewById(R.id.recipeCreatorTitle);
 		recipeName = (EditText)findViewById(R.id.recipeName);
 		ingredient1 = (EditText)findViewById(R.id.ingredient1);
 		ingredient2 = (EditText)findViewById(R.id.ingredient2);
 		ingredient3 = (EditText)findViewById(R.id.ingredient3);
-		
+
 		direction1 = (EditText)findViewById(R.id.directions);
-		
-		buttonType = (RadioGroup)findViewById(R.id.buttonGroupType);
-		breakfast = (RadioButton)findViewById(R.id.breakfast);
-		lunch = (RadioButton)findViewById(R.id.lunch);
-		dinner = (RadioButton)findViewById(R.id.dinner);
-		
+
+		breakfast = (CheckBox)findViewById(R.id.breakfast);
+		lunch = (CheckBox)findViewById(R.id.lunch);
+		dinner = (CheckBox)findViewById(R.id.dinner);
+
 		Button btn = (Button)findViewById(R.id.addRecipe);
 
 		//Check to see if the recipe already exists, if so, then load the data into the form.
@@ -69,11 +68,7 @@ public class AddRecipe extends Activity{
 			linearLayout.addView(cancelSave);
 			load();
 		}
-		else{
-			breakfast.setChecked(true);
-		}
 
-		
 		btn.setOnClickListener(new OnClickListener(){
 
 			@Override
@@ -96,12 +91,27 @@ public class AddRecipe extends Activity{
 	}
 
 	private void save() {
-		RadioButton b = (RadioButton)findViewById(buttonType.getCheckedRadioButtonId());
+		String mealType = "";
+		if(breakfast.isChecked()){
+			mealType.concat(breakfast.getText().toString());
+		}
+		if(lunch.isChecked()){
+			if(mealType.length() > 0){
+				mealType.concat(", ");
+			}
+			mealType.concat(lunch.getText().toString());
+		}
+		if(dinner.isChecked()){
+			if(mealType.length() > 0){
+				mealType.concat(", ");
+			}
+			mealType.concat(dinner.getText().toString());
+		}
 		if(recipeId == null) {
-			helper.insert(recipeName.getText().toString(), b.getText().toString(), ingredient1.getText().toString(), ingredient2.getText().toString(), ingredient3.getText().toString(), direction1.getText().toString());
+			helper.insert(recipeName.getText().toString(), mealType, ingredient1.getText().toString(), ingredient2.getText().toString(), ingredient3.getText().toString(), direction1.getText().toString());
 		}
 		else {
-			helper.update(recipeId, recipeName.getText().toString(), b.getText().toString(), ingredient1.getText().toString(), ingredient2.getText().toString(), ingredient3.getText().toString(), direction1.getText().toString());			
+			helper.update(recipeId, recipeName.getText().toString(), mealType, ingredient1.getText().toString(), ingredient2.getText().toString(), ingredient3.getText().toString(), direction1.getText().toString());			
 		}
 		finish();
 	}
@@ -116,23 +126,51 @@ public class AddRecipe extends Activity{
 		ingredient2.setText(helper.getIngredient(c, 2));
 		ingredient3.setText(helper.getIngredient(c, 3));
 		direction1.setText(helper.getDirections(c));
-		
+
 		String type = helper.getType(c);
 		Log.e("Test", helper.getType(c));
-		if( type.equals("Breakfast")){
+		if( type.contains(breakfast.getText().toString())){
 			breakfast.setChecked(true);
 		}
-		else if( type.equals("Lunch")){
+		if( type.contains(lunch.getText().toString())){
 			lunch.setChecked(true);
 		}
-		else if( type.equals("Dinner")){
+		if(type.contains(dinner.getText().toString())){
 			dinner.setChecked(true);
 		}
 		c.close();
 	}
 
 	public void noRecipeAdded(){
-		Toast.makeText(this, R.string.no_recipe, Toast.LENGTH_SHORT).show();
+		StringBuilder error = new StringBuilder("This doesn't look like a valid recipe, you are missing:\n");
+		if(recipeName.getText().toString().equals("")){
+			error.append("\tThere is no recipe name.\n");
+		}
+		if(direction1.getText().toString().equals("")){
+			error.append("\tThere is no first ingredient.\n");
+		}
+		if(ingredient1.getText().toString().equals("")){
+			error.append("\tThere are no directions.\n");
+		}
+
+		error.append("\nTo cancel creating a recipe, press the back button.");
+
+		AlertDialog.Builder alert = new AlertDialog.Builder(this);
+		alert.setMessage(error.toString())
+		.setPositiveButton("Return and fix.", new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+			}
+		})
+		.setNegativeButton("Cancel recipe creation", new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				finish();
+			}
+		})
+		.show();
 	}
 
 }
