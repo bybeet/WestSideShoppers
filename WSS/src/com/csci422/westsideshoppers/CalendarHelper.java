@@ -29,6 +29,10 @@ public class CalendarHelper extends SQLiteOpenHelper {
 
 		return getReadableDatabase().rawQuery("SELECT _id, date, recipe FROM calendar WHERE _ID=?", args);
 	}
+	
+	public void delete(String id){
+		getWritableDatabase().delete("calendar", "_id" + "=" + id,null);
+	}
 
 	public void insert(long date, String recipe){
 		ContentValues cv=new ContentValues();

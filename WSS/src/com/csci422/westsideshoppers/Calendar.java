@@ -67,6 +67,8 @@ public class Calendar extends Activity {
 			}
 
 		});
+		
+		initCalendarList();
 
 		list = (ListView)findViewById(R.id.list);
 		list.setOnItemLongClickListener(new OnItemLongClickListener(){
@@ -74,11 +76,16 @@ public class Calendar extends Activity {
 			@Override
 			public boolean onItemLongClick(AdapterView<?> arg0, View view, int position, long id) {
 				AlertDialog.Builder diag = new AlertDialog.Builder(Calendar.this);
+				//final long test = id;
 				diag.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
 
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						Toast.makeText(Calendar.this, "Delete", Toast.LENGTH_SHORT).show();
+						//cursor = helper.getById(String.valueOf(test));
+						//calHelper.delete(String.valueOf(test));
+						//finish();
+						//startActivity(getIntent());
 					}
 				})
 				.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -96,7 +103,7 @@ public class Calendar extends Activity {
 			}
 		});
 
-		initCalendarList();
+		
 	}
 
 	@Override
