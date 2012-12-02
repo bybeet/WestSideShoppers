@@ -71,17 +71,7 @@ public class Shopping extends ListActivity {
 			
 		});
 		endSpinner.getDayOfMonth();
-		
-	}
-	
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data){
-		Log.v("ActivityResult", "Here");
-		super.onActivityResult(requestCode, resultCode, data);
-		Log.v("ActivityResult", "Here");
-		beginDate = data.getLongExtra(DATE_1, 0);
-		endDate = data.getLongExtra(DATE_2, 0);
-		setUpShoppingList();
+
 	}
 	
 	private void setUpShoppingList(){
