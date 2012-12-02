@@ -74,60 +74,60 @@ public class Calendar extends Activity {
 			@Override
 			public boolean onItemLongClick(AdapterView<?> arg0, View view, int position, long id) {
 				Toast.makeText(Calendar.this, "Long", Toast.LENGTH_SHORT).show();
-				AlertDialog.Builder confirmation = new AlertDialog.Builder(view.getContext())
-					.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
-					
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							Toast.makeText(Calendar.this, "Delete", Toast.LENGTH_SHORT).show();
-						}
-					});
-					confirmation.create();
-					
+				AlertDialog.Builder diag = new AlertDialog.Builder(Calendar.this);
+				diag.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						Toast.makeText(Calendar.this, "Delete", Toast.LENGTH_SHORT).show();
+					}
+				})
+				.show();
+
 				return true;
 
 			}
 		});
 
 		initCalendarList();
-		}
-
-		@Override
-		public void onDestroy(){
-			super.onDestroy();
-			helper.close();
-		}
-
-		@SuppressWarnings("deprecation")
-		private void initCalendarList(){
-			if(cursor != null){
-				stopManagingCursor(cursor);
-				cursor.close();
-			}
-
-			cursor = calHelper.getAll();
-			startManagingCursor(cursor);
-
-			String[] from = new String[] {"date", "recipe"};
-			int[] to = new int[] {R.id.recipeName, R.id.mealType};
-			SimpleCursorAdapter mAdapter = new SimpleCursorAdapter(this, R.layout.row, cursor, from, to);
-
-			list.setAdapter(mAdapter);
-
-			/*
-		Log.e("Calendar", "ListView Adapter = " + list.getAdapter());
-			 */
-		}
-
-		private String returnStringDate(){
-			Date df = new java.util.Date(calendar.getDate());
-			String date = new SimpleDateFormat("EEEE, MM/dd").format(df);
-			return date;
-		}
-
 	}
 
-	/*
+	@Override
+	public void onDestroy(){
+		super.onDestroy();
+		helper.close();
+	}
+
+	@SuppressWarnings("deprecation")
+	private void initCalendarList(){
+		if(cursor != null){
+			stopManagingCursor(cursor);
+			cursor.close();
+		}
+
+		cursor = calHelper.getAll();
+		startManagingCursor(cursor);
+
+		String[] from = new String[] {"date", "recipe"};
+		int[] to = new int[] {R.id.recipeName, R.id.mealType};
+		SimpleCursorAdapter mAdapter = new SimpleCursorAdapter(this, R.layout.row, cursor, from, to);
+
+		list.setAdapter(mAdapter);
+
+		/*
+		Log.e("Calendar", "ListView Adapter = " + list.getAdapter());
+		 */
+	}
+
+	private String returnStringDate(){
+		Date df = new java.util.Date(calendar.getDate());
+		String date = new SimpleDateFormat("EEEE, MM/dd").format(df);
+		return date;
+	}
+
+}
+
+/*
 
 
 
@@ -168,4 +168,4 @@ list.setOnItemClickListener( new OnItemClickListener() {
 			}
 		});
 
-	 */
+ */
