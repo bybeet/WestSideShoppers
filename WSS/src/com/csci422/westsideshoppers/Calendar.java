@@ -4,30 +4,30 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import android.app.Activity;
-import android.content.Context;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.v4.widget.CursorAdapter;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.CalendarView.OnDateChangeListener;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
-import android.widget.TextView;
+import android.widget.Toast;
 
 public class Calendar extends Activity {
 
 	private Cursor cursor;
 	private RecipeHelper helper;
+	private CalendarHelper calHelper;
 	private CalendarView calendar;
-	private RecipeAdapter adapter;
 	private Button btn;
 	private ListView list;
 
@@ -39,7 +39,9 @@ public class Calendar extends Activity {
 		setContentView(R.layout.activity_calendar);
 
 		LinearLayout layout = (LinearLayout)findViewById(R.id.calendar_layout);
+
 		helper = new  RecipeHelper(this);
+		calHelper = new CalendarHelper(this);
 
 		calendar = (CalendarView)layout.findViewById(R.id.calendarMealView);
 		btn = (Button)layout.findViewById(R.id.addMeal);
@@ -54,6 +56,7 @@ public class Calendar extends Activity {
 				startActivity(i);
 			}
 		});
+
 		calendar.setOnDateChangeListener(new OnDateChangeListener() {
 
 			@Override
@@ -66,49 +69,68 @@ public class Calendar extends Activity {
 		});
 
 		list = (ListView)findViewById(R.id.list);
+		list.setOnItemLongClickListener(new OnItemLongClickListener(){
+
+			@Override
+			public boolean onItemLongClick(AdapterView<?> arg0, View view, int position, long id) {
+				Toast.makeText(Calendar.this, "Long", Toast.LENGTH_SHORT).show();
+				AlertDialog.Builder confirmation = new AlertDialog.Builder(view.getContext())
+					.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+					
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							Toast.makeText(Calendar.this, "Delete", Toast.LENGTH_SHORT).show();
+						}
+					});
+					confirmation.create();
+					
+				return true;
+
+			}
+		});
 
 		initCalendarList();
-	}
-
-	@Override
-	public void onDestroy(){
-		super.onDestroy();
-		helper.close();
-	}
-
-	@SuppressWarnings("deprecation")
-	private void initCalendarList(){
-		if(cursor != null){
-			stopManagingCursor(cursor);
-			cursor.close();
 		}
 
-		cursor = helper.getAll();
-		startManagingCursor(cursor);
+		@Override
+		public void onDestroy(){
+			super.onDestroy();
+			helper.close();
+		}
 
-		String[] from = new String[] {"name", "type"};
-		int[] to = new int[] {R.id.recipeName, R.id.mealType};
-		SimpleCursorAdapter mAdapter = new SimpleCursorAdapter(this, R.layout.row, cursor, from, to);
+		@SuppressWarnings("deprecation")
+		private void initCalendarList(){
+			if(cursor != null){
+				stopManagingCursor(cursor);
+				cursor.close();
+			}
 
-		list.setAdapter(mAdapter);
+			cursor = calHelper.getAll();
+			startManagingCursor(cursor);
 
-		/*
+			String[] from = new String[] {"date", "recipe"};
+			int[] to = new int[] {R.id.recipeName, R.id.mealType};
+			SimpleCursorAdapter mAdapter = new SimpleCursorAdapter(this, R.layout.row, cursor, from, to);
+
+			list.setAdapter(mAdapter);
+
+			/*
 		Log.e("Calendar", "ListView Adapter = " + list.getAdapter());
-		 */
+			 */
+		}
+
+		private String returnStringDate(){
+			Date df = new java.util.Date(calendar.getDate());
+			String date = new SimpleDateFormat("EEEE, MM/dd").format(df);
+			return date;
+		}
+
 	}
-	
-	private String returnStringDate(){
-		Date df = new java.util.Date(calendar.getDate());
-		String date = new SimpleDateFormat("EEEE, MM/dd").format(df);
-		return date;
-	}
 
-}
-
-/*
+	/*
 
 
-	
+
 
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) {
@@ -146,4 +168,4 @@ list.setOnItemClickListener( new OnItemClickListener() {
 			}
 		});
 
- */
+	 */

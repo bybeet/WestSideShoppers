@@ -1,22 +1,19 @@
 package com.csci422.westsideshoppers;
 
 import android.app.ListActivity;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.CalendarView;
-import android.widget.CursorAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.TextView;
+
+import com.csci422.westsideshoppers.Recipes.RecipeAdapter;
 
 public class AddCalendarMeal extends ListActivity{
 	
@@ -24,7 +21,6 @@ public class AddCalendarMeal extends ListActivity{
 	private Cursor calCursor;
 	
 	private RecipeHelper recipeHelper;
-	private RecipeAdapter adapter;
 	private CalendarHelper calHelper;
 	
 	private Spinner spinner;
@@ -108,10 +104,14 @@ public class AddCalendarMeal extends ListActivity{
 		recipes = recipeHelper.getAll();
 		startManagingCursor(recipes);
 		
-		adapter = new RecipeAdapter(recipes);
+		String[] from = new String[] {"name", "type"};
+		int[] to = new int[] {R.id.recipeName, R.id.mealType};
+		
+		SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, R.layout.row, recipes, from, to);
 		setListAdapter(adapter);
 	}
 	
+	/*
 	class RecipeAdapter extends CursorAdapter {
 		RecipeAdapter(Cursor c){
 			super(AddCalendarMeal.this, c);
@@ -147,4 +147,5 @@ public class AddCalendarMeal extends ListActivity{
 			name.setText(helper.getName(c));
 		}
 	}
+	*/
 }
