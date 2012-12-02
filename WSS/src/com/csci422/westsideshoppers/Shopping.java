@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.database.Cursor;
@@ -12,12 +13,21 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.TextView;
 
 public class Shopping extends ListActivity {
 	
 	public static String DATE_1 = "com.csci422.date1";
 	public static String DATE_2 = "com.csci442.date2";
+	
+	private int sYear;
+	private int sMonth;
+	private int sDay;
+	
+	private int endYear;
+	private int endMonth;
+	private int endDay;
 	
 	long beginDate;
 	long endDate;
@@ -29,26 +39,38 @@ public class Shopping extends ListActivity {
 	private CalendarHelper calHelper;
 	
 	private TextView dateRange;
-
+	
+	private DatePicker startSpinner;
+	private DatePicker endSpinner;
+	private Button setDate;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceBundle){
 		super.onCreate(savedInstanceBundle);
 		setContentView(R.layout.activity_shopping);
 		
-		dateRange = (TextView)findViewById(R.id.dateRange);
+		startSpinner = (DatePicker)findViewById(R.id.begin_date);
+		startSpinner.setCalendarViewShown(false);
+		endSpinner = (DatePicker)findViewById(R.id.end_date);
+		endSpinner.setCalendarViewShown(false);
 		
-		Button btn = (Button)findViewById(R.id.datePicker);
-		btn.setOnClickListener(new OnClickListener(){
+		setDate = (Button)findViewById(R.id.setList);
+		setDate.setText("Set Date");		
 		
+		setDate.setOnClickListener( new OnClickListener() {
+
 			@Override
-			public void onClick(View view){
-				Intent i = new Intent(Shopping.this, SetDateRange.class);				
-				startActivityForResult(i, Activity.RESULT_OK);
-				Log.v("onClick", "Started activity");
+			public void onClick(View v) {
+				startSpinner.setSpinnersShown ( !startSpinner.getSpinnersShown());
+				endSpinner.setSpinnersShown ( !endSpinner.getSpinnersShown());
+				if(startSpinner.getSpinnersShown())
+					setDate.setText("Set Date");
+				else
+					setDate.setText("Show Spinners");
 			}
 			
 		});
-		
+		endSpinner.getDayOfMonth();
 		
 	}
 	
