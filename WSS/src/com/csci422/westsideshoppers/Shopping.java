@@ -54,9 +54,7 @@ public class Shopping extends ListActivity {
 		endSpinner = (DatePicker)findViewById(R.id.end_date);
 		endSpinner.setCalendarViewShown(false);
 		
-		setDate = (Button)findViewById(R.id.setList);
-		setDate.setText("Set Date");		
-		
+		setDate = (Button)findViewById(R.id.setList);	
 		setDate.setOnClickListener( new OnClickListener() {
 
 			@Override
@@ -64,9 +62,9 @@ public class Shopping extends ListActivity {
 				startSpinner.setSpinnersShown ( !startSpinner.getSpinnersShown());
 				endSpinner.setSpinnersShown ( !endSpinner.getSpinnersShown());
 				if(startSpinner.getSpinnersShown())
-					setDate.setText("Set Date");
+					setDate.setText(R.string.set_date_range);
 				else
-					setDate.setText("Show Spinners");
+					setDate.setText(R.string.show_date_pickers);
 			}
 			
 		});
