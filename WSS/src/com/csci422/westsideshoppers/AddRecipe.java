@@ -91,27 +91,27 @@ public class AddRecipe extends Activity{
 	}
 
 	private void save() {
-		String mealType = "";
+		StringBuilder mealType = new StringBuilder("");
 		if(breakfast.isChecked()){
-			mealType.concat(breakfast.getText().toString());
+			mealType.append(breakfast.getText().toString());
 		}
 		if(lunch.isChecked()){
 			if(mealType.length() > 0){
-				mealType.concat(", ");
+				mealType.append(", ");
 			}
-			mealType.concat(lunch.getText().toString());
+			mealType.append(lunch.getText().toString());
 		}
 		if(dinner.isChecked()){
 			if(mealType.length() > 0){
-				mealType.concat(", ");
+				mealType.append(", ");
 			}
-			mealType.concat(dinner.getText().toString());
+			mealType.append(dinner.getText().toString());
 		}
 		if(recipeId == null) {
-			helper.insert(recipeName.getText().toString(), mealType, ingredient1.getText().toString(), ingredient2.getText().toString(), ingredient3.getText().toString(), direction1.getText().toString());
+			helper.insert(recipeName.getText().toString(), mealType.toString(), ingredient1.getText().toString(), ingredient2.getText().toString(), ingredient3.getText().toString(), direction1.getText().toString());
 		}
 		else {
-			helper.update(recipeId, recipeName.getText().toString(), mealType, ingredient1.getText().toString(), ingredient2.getText().toString(), ingredient3.getText().toString(), direction1.getText().toString());			
+			helper.update(recipeId, recipeName.getText().toString(), mealType.toString(), ingredient1.getText().toString(), ingredient2.getText().toString(), ingredient3.getText().toString(), direction1.getText().toString());			
 		}
 		finish();
 	}
