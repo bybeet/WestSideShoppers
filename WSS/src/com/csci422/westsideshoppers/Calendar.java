@@ -90,8 +90,6 @@ public class Calendar extends Activity {
 		int[] to = new int[] {R.id.recipeName, R.id.mealType};
 		SimpleCursorAdapter mAdapter = new SimpleCursorAdapter(this, R.layout.row, cursor, from, to);
 
-		adapter = new RecipeAdapter(cursor);
-
 		list.setAdapter(mAdapter);
 
 		/*
@@ -105,43 +103,6 @@ public class Calendar extends Activity {
 		return date;
 	}
 
-	class RecipeAdapter extends CursorAdapter {
-		RecipeAdapter(Cursor c){
-			super(Calendar.this, c);
-		}
-
-		@Override
-		public void bindView(View row, Context ctxt, Cursor c) {
-			RecipeHolder holder = (RecipeHolder)row.getTag();
-			holder.populateFrom(c, helper);
-		}
-
-		@Override
-		public View newView(Context ctxt, Cursor c, ViewGroup parent){
-			LayoutInflater inflater = getLayoutInflater();
-			View row = inflater.inflate(R.layout.row, parent, false);
-			RecipeHolder holder = new RecipeHolder(row);
-			row.setTag(holder);
-			return row;
-		}
-	}
-
-	static class RecipeHolder {
-		private TextView name;
-		private TextView mealType;
-
-		RecipeHolder (View row){
-			name = (TextView)row.findViewById(R.id.recipeName);
-			mealType = (TextView)row.findViewById(R.id.mealType);
-		}
-
-		void populateFrom(Cursor c, RecipeHelper helper){
-			mealType.setText(helper.getType(c));
-			name.setText(helper.getName(c));
-			//Log.e("Recipe List", helper.getType(c));
-
-		}
-	}
 }
 
 /*
