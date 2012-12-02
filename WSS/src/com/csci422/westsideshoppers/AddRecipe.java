@@ -31,6 +31,8 @@ public class AddRecipe extends Activity{
 	CheckBox breakfast;
 	CheckBox lunch;
 	CheckBox dinner;
+	CheckBox dessert;
+	CheckBox snack;
 
 	String recipeId;
 
@@ -54,6 +56,8 @@ public class AddRecipe extends Activity{
 		breakfast = (CheckBox)findViewById(R.id.breakfast);
 		lunch = (CheckBox)findViewById(R.id.lunch);
 		dinner = (CheckBox)findViewById(R.id.dinner);
+		dessert = (CheckBox)findViewById(R.id.dessert);
+		snack = (CheckBox)findViewById(R.id.snack);
 
 		Button btn = (Button)findViewById(R.id.addRecipe);
 
@@ -107,6 +111,18 @@ public class AddRecipe extends Activity{
 			}
 			mealType.append(dinner.getText().toString());
 		}
+		if(snack.isChecked()){
+			if(mealType.length() > 0){
+				mealType.append(", ");
+			}
+			mealType.append(snack.getText().toString());
+		}
+		if(dessert.isChecked()){
+			if(mealType.length() > 0){
+				mealType.append(", ");
+			}
+			mealType.append(dessert.getText().toString());
+		}
 		if(recipeId == null) {
 			helper.insert(recipeName.getText().toString(), mealType.toString(), ingredient1.getText().toString(), ingredient2.getText().toString(), ingredient3.getText().toString(), direction1.getText().toString());
 		}
@@ -137,6 +153,12 @@ public class AddRecipe extends Activity{
 		}
 		if(type.contains(dinner.getText().toString())){
 			dinner.setChecked(true);
+		}
+		if(type.contains(snack.getText().toString())){
+			snack.setChecked(true);
+		}
+		if(type.contains(dessert.getText().toString())){
+			dessert.setChecked(true);
 		}
 		c.close();
 	}

@@ -66,6 +66,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Dinner" />
+                
+                <CheckBox
+                    android:id="@+id/snack"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Snack" />
+                <CheckBox
+                android:id="@+id/dessert"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Dessert" />
 
             <TextView
                 android:id="@+id/ingredient_list"
