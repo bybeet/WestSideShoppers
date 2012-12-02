@@ -73,7 +73,6 @@ public class Calendar extends Activity {
 
 			@Override
 			public boolean onItemLongClick(AdapterView<?> arg0, View view, int position, long id) {
-				Toast.makeText(Calendar.this, "Long", Toast.LENGTH_SHORT).show();
 				AlertDialog.Builder diag = new AlertDialog.Builder(Calendar.this);
 				diag.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
 
@@ -82,6 +81,14 @@ public class Calendar extends Activity {
 						Toast.makeText(Calendar.this, "Delete", Toast.LENGTH_SHORT).show();
 					}
 				})
+				.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						Toast.makeText(Calendar.this, "Cancel", Toast.LENGTH_SHORT).show();
+					}
+				})
+				.setCancelable(true)
 				.show();
 
 				return true;
