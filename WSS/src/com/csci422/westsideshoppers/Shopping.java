@@ -38,7 +38,8 @@ public class Shopping extends ListActivity {
 	private RecipeHelper recipeHelper;
 	private CalendarHelper calHelper;
 	
-	private TextView dateRange;
+	private TextView startLabel;
+	private TextView endLabel;
 	
 	private DatePicker startSpinner;
 	private DatePicker endSpinner;
@@ -48,6 +49,12 @@ public class Shopping extends ListActivity {
 	public void onCreate(Bundle savedInstanceBundle){
 		super.onCreate(savedInstanceBundle);
 		setContentView(R.layout.activity_shopping);
+		
+		startLabel = (TextView)findViewById(R.id.begin_date_label);
+		endLabel = (TextView)findViewById(R.id.end_date_label);
+		
+		startLabel.setText("Start list with:");
+		endLabel.setText("End list with:");
 		
 		startSpinner = (DatePicker)findViewById(R.id.begin_date);
 		startSpinner.setCalendarViewShown(false);
@@ -70,14 +77,5 @@ public class Shopping extends ListActivity {
 		});
 		endSpinner.getDayOfMonth();
 
-	}
-	
-	private void setUpShoppingList(){
-		Log.v("Set up list", "Test");
-		Date df = new Date(beginDate);
-		String begin = new SimpleDateFormat("EEEE, MM/dd").format(df);
-		df = new Date(endDate);
-		String end = new SimpleDateFormat("EEEE, MM/dd").format(df);
-		dateRange.setText("From " + begin + " to " + end);
 	}
 }
