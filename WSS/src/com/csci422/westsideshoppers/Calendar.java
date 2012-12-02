@@ -5,27 +5,32 @@ import java.util.Date;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.CalendarView.OnDateChangeListener;
+import android.widget.CursorAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
-import android.widget.Toast;
+import android.widget.TextView;
 
 public class Calendar extends Activity {
 
 	private Cursor cursor;
-	private RecipeHelper helper;
+	private Cursor rc;
+	private RecipeHelper recipeHelper;
 	private CalendarHelper calHelper;
 	private CalendarView calendar;
 	private Button btn;
@@ -40,7 +45,7 @@ public class Calendar extends Activity {
 
 		LinearLayout layout = (LinearLayout)findViewById(R.id.calendar_layout);
 
-		helper = new  RecipeHelper(this);
+		recipeHelper = new  RecipeHelper(this);
 		calHelper = new CalendarHelper(this);
 
 		calendar = (CalendarView)layout.findViewById(R.id.calendarMealView);
@@ -106,7 +111,8 @@ public class Calendar extends Activity {
 	@Override
 	public void onDestroy(){
 		super.onDestroy();
-		helper.close();
+		calHelper.close();
+		recipeHelper.close();
 	}
 
 	@SuppressWarnings("deprecation")
@@ -117,17 +123,13 @@ public class Calendar extends Activity {
 		}
 
 		cursor = calHelper.getByDate(currentDate());
-		startManagingCursor(cursor);
+		startManagingCursor(cursor);		
 
-		String[] from = new String[] {"date", "recipe"};
-		int[] to = new int[] {R.id.recipeName, R.id.mealType};
-		SimpleCursorAdapter mAdapter = new SimpleCursorAdapter(this, R.layout.row, cursor, from, to);
+		String[] from = new String[] {"recipe"};
+		int[] to = new int[] {android.R.id.text1};
+		SimpleCursorAdapter mAdapter = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_1, cursor, from, to);
 
 		list.setAdapter(mAdapter);
-
-		/*
-		Log.e("Calendar", "ListView Adapter = " + list.getAdapter());
-		 */
 	}
 
 	private String returnStringDate(){
@@ -140,7 +142,7 @@ public class Calendar extends Activity {
 		Date df = new Date(calendar.getDate());
 		return new SimpleDateFormat("MM/dd/yy").format(df);
 	}
-
+		
 }
 
 /*

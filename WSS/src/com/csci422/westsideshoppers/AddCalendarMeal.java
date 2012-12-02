@@ -89,8 +89,17 @@ public class AddCalendarMeal extends ListActivity{
 	
 	@Override
 	public void onListItemClick(ListView list, View view, int position, long id) {
-		System.out.println(date);
-		calHelper.insert(date, String.valueOf(id));
+		if(recipes != null){
+			stopManagingCursor(recipes);
+			recipes.close();
+		}
+		
+		recipes = recipeHelper.getById(String.valueOf(id));
+		startManagingCursor(recipes);
+		recipes.moveToFirst();
+		Log.v("onListClick", recipes.toString());
+		
+		calHelper.insert(date, recipeHelper.getName(recipes));
 		finish();
 	}
 	
