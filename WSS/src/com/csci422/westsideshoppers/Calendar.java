@@ -5,26 +5,21 @@ import java.util.Date;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.CalendarView.OnDateChangeListener;
-import android.widget.CursorAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
-import android.widget.TextView;
 
 public class Calendar extends Activity {
 
@@ -114,7 +109,23 @@ public class Calendar extends Activity {
 		calHelper.close();
 		recipeHelper.close();
 	}
-
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+	    if(getParent() != null) {
+	        return getParent().onCreateOptionsMenu(menu);
+	    }
+	    return false;
+	}
+	
+	@Override
+	public boolean onPrepareOptionsMenu(Menu menu) {
+	    if(getParent() != null) {
+	        return getParent().onPrepareOptionsMenu(menu);
+	    }
+	    return false;
+	}
+	
 	@SuppressWarnings("deprecation")
 	private void initCalendarList(){
 		if(cursor != null){
