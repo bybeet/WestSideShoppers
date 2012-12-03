@@ -53,17 +53,6 @@ public class Shopping extends ListActivity {
 
 		list = (ListView)findViewById(R.id.list);
 		list.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);  
-		//list.setClickable(true);
-		/*list.setOnItemClickListener(new OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> arg0, View view, int arg2, long arg3) {
-				CheckBox box = (CheckBox)arg0.findViewById(R.id.row_checkbox);
-				box.setChecked(!box.isChecked());
-				System.out.println("CLICK");
-			}
-
-		});*/
 
 		recipeHelper = new RecipeHelper(this);
 		calHelper = new CalendarHelper(this);
@@ -111,25 +100,20 @@ public class Shopping extends ListActivity {
 		});
 	}
 	
-	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-	    if (getParent() != null) 
-	    {
-	        return getParent().onCreateOptionsMenu(menu);
-	    }
 		new MenuInflater(this).inflate(R.menu.menu_shopping, menu);
-		return (super.onCreateOptionsMenu(menu));
+		return true;
 	}
 
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if(item.getItemId() == R.id.clear) {
-			Toast.makeText(this, "Clear", Toast.LENGTH_SHORT);
+			Toast.makeText(this, "Clear", Toast.LENGTH_SHORT).show();
 			return true;
 		}
 		if(item.getItemId() == R.id.addItem){
-			Toast.makeText(this, "Add", Toast.LENGTH_SHORT);
+			Toast.makeText(this, "Add", Toast.LENGTH_SHORT).show();
 			return true;
 		}
 

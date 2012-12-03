@@ -27,7 +27,7 @@ public class WestSideShoppers extends TabActivity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		menu.clear();
+		new MenuInflater(this).inflate(R.menu.menu_shopping, menu);
 		return true;
 	}
 }

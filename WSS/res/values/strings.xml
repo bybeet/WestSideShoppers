@@ -22,8 +22,8 @@
     <string name="cancel_edit_recipe">Press the back button to undo modifications to the recipe.</string>
     <string name="set_date_range">Show Ingredients</string>
     <string name="show_date_pickers">Show Date Pickers</string>
-    <string name="clear_shopping_list">Clear Checked Shopping List Ingredients</string>
-    <string name="add_item">Add Item to Shopping List</string>
+    <string name="clear_shopping_list">Clear Checked Items</string>
+    <string name="add_item">Add to Shopping List</string>
     <string name="end_date_in_past">It looks like your end date is in the past compared to your start date. Please change the lower date to one that is not in the past.</string>
 
 </resources>
