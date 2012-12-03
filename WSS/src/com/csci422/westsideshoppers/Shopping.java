@@ -49,6 +49,7 @@ public class Shopping extends ListActivity {
 		dateRange = (TextView)findViewById(R.id.dateRange);
 
 		list = (ListView)findViewById(R.id.list);
+		list.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);  
 		//list.setClickable(true);
 		/*list.setOnItemClickListener(new OnItemClickListener() {
 
@@ -108,6 +109,7 @@ public class Shopping extends ListActivity {
 		}
 		if(recipe != null){
 			stopManagingCursor(recipe);
+			recipe.close();
 		}
 
 		calendar = calHelper.getAll();
