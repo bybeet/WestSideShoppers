@@ -15,6 +15,7 @@
             android:orientation="horizontal" >
 
             <CheckBox
+                android:id="@+id/row_checkbox"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:height="35dp"
