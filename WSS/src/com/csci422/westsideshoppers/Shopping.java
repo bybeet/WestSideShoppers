@@ -118,6 +118,7 @@ public class Shopping extends Activity {
 					dateRange.setVisibility(View.GONE);
 					list.setVisibility(View.GONE);
 					addItem.setVisibility(View.GONE);
+					clearList.setVisibility(View.GONE);
 				}
 				else {
 
@@ -170,6 +171,7 @@ public class Shopping extends Activity {
 		dateRange.setText("From " + beginDate + " to " + endDate);
 		dateRange.setVisibility(View.VISIBLE);
 		addItem.setVisibility(View.VISIBLE);
+		clearList.setVisibility(View.VISIBLE);
 
 		if(calendar != null){
 			stopManagingCursor(calendar);
@@ -249,11 +251,12 @@ public class Shopping extends Activity {
 
 	private void clearShoppingList(){
 		int count = this.list.getAdapter().getCount();
-
 		for (int i = 0; i < count; i++) {
-			this.list.setItemChecked(i, false);
+			if (this.list.isItemChecked(i)) {
+				shoppingList.remove(i);
+			}
 		}
-		
+
 		System.out.println("Clear");
 	}
 }
