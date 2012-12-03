@@ -224,8 +224,11 @@ public class Shopping extends Activity {
 			//iterate over rows
 			for (int i = 0; i < calendar.getCount(); i++) {
 				try{
+					System.out.println(sdf.parse(calHelper.getDate(calendar)));
+
 					System.out.println(bday.compareTo(sdf.parse(calHelper.getDate(calendar))));
-				if(bday.compareTo(sdf.parse(calHelper.getDate(calendar))) >= 0 && fday.compareTo(sdf.parse(calHelper.getDate(calendar))) <= 0){
+					System.out.println(fday.compareTo(sdf.parse(calHelper.getDate(calendar))));
+				if(bday.compareTo(sdf.parse(calHelper.getDate(calendar))) <= 0 && fday.compareTo(sdf.parse(calHelper.getDate(calendar))) >= 0){
 					recipe = recipeHelper.getByRecipeName(calHelper.getRecipe(calendar));
 					System.out.println("Passed comparison");
 					recipe.moveToFirst();
@@ -236,23 +239,22 @@ public class Shopping extends Activity {
 						}
 					}
 				}
+				else
+					System.out.println("Failed comparison");
 				}catch (Exception e){
 					Log.e("Date Parsing", "Something went wrong with shopping list date iteration");
 					e.printStackTrace();
 				}
-				
-				System.out.println(calHelper.getDate(calendar));
+
 				calendar.moveToNext();
 			}
 		}
 
-
-		String[] from = new String[] {"recipe"};
-		int[] to = new int[] {R.id.recipeName};
-		SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, R.layout.row_check_box, calendar, from, to);
-
+		System.out.println(shoppingList.toString());
+		ArrayAdapter<String> aAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, shoppingList);
+		
 		list.setVisibility(View.VISIBLE);
-		list.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, shoppingList));
+		list.setAdapter(aAdapter);
 	}
 
 	private void setPickerDate(){
@@ -284,21 +286,24 @@ public class Shopping extends Activity {
 	}
 
 	private void clearShoppingList(){
+		System.out.println("Clear");
+		
 		ArrayList<Integer> temp = new ArrayList<Integer>();
-		SparseBooleanArray a = list.getCheckedItemPositions();
-		for(int i = 0; i < shoppingList.size() ; i++)
-		{
-			if (a.valueAt(i))
-			{
-				temp.add(i);
-			}
-		}
-		for(int i = temp.size()-1; i >= 0; i--){
-			shoppingList.remove((int)temp.get(i));
-		}
+		SparseBooleanArray checked = list.getCheckedItemPositions();
 
+		for (int i = checked.size(); i >= 0; i--){
+		    if (checked.get(i))
+		       shoppingList.remove(i);
+		    else
+		        continue;
+		}
+		
+		//System.out.println(temp.toString());
+		//for(int i = temp.size()-1; i >= 0; i--){
+		//	shoppingList.remove((int)temp.get(i));
+		//}
+		
 		list.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, shoppingList));
 
-		System.out.println("Clear");
 	}
 }
