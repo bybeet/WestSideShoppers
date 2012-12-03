@@ -29,6 +29,11 @@ class RecipeHelper extends SQLiteOpenHelper {
 
 		return getReadableDatabase().rawQuery("SELECT _id, name, type, ingredient1, ingredient2, ingredient3, directions FROM recipes WHERE _ID=?", args);
 	}
+	
+	public Cursor getByRecipeName(String name){
+		String sql = " SELECT * FROM recipes WHERE name LIKE '%" + name + "%'";
+		return getReadableDatabase().rawQuery(sql, null);
+	}
 
 	public void insert(String name, String type, String ingredient1, String ingredient2, String ingredient3, String directions) {
 		ContentValues cv=new ContentValues();
