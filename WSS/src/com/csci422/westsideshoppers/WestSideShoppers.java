@@ -7,8 +7,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TabHost;
-import android.widget.Toast;
 import android.widget.TabHost.OnTabChangeListener;
+
 
 @SuppressWarnings("deprecation")
 public class WestSideShoppers extends TabActivity {
@@ -28,9 +28,9 @@ public class WestSideShoppers extends TabActivity {
 		tabHost.addTab(tabHost.newTabSpec("Meal Planner").setIndicator("Meal Planner").setContent(new Intent(this, Calendar.class)));
 		tabHost.addTab(tabHost.newTabSpec("Shopping List").setIndicator("Shopping List").setContent(new Intent(this, Shopping.class)));
 		tabHost.addTab(tabHost.newTabSpec("Recipe Editor").setIndicator("Recipe Editor").setContent(new Intent(this, Recipes.class)));
-	
+
 		tabHost.setOnTabChangedListener(new OnTabChangeListener() {
-			
+
 			@Override
 			public void onTabChanged(String tabId) {
 				invalidateOptionsMenu();
@@ -38,7 +38,7 @@ public class WestSideShoppers extends TabActivity {
 		});
 
 	}
-	
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		return false;
@@ -60,5 +60,5 @@ public class WestSideShoppers extends TabActivity {
 		}
 		return false;
 	}
-	
+
 }

@@ -37,9 +37,6 @@ public class Shopping extends Activity {
 
 	private TextView startLabel;
 	private TextView endLabel;
-
-	private ArrayAdapter<String> aAdapter;
-
 	private TextView dateRange;
 
 	private DatePicker startSpinner;
@@ -133,9 +130,13 @@ public class Shopping extends Activity {
 					list.setVisibility(View.GONE);
 					addItem.setVisibility(View.GONE);
 					clearList.setVisibility(View.GONE);
+					startLabel.setVisibility(View.VISIBLE);
+					endLabel.setVisibility(View.VISIBLE);
+					shoppingList.clear();
 				}
 				else {
-
+					startLabel.setVisibility(View.GONE);
+					endLabel.setVisibility(View.GONE);
 					setDate.setText(R.string.show_date_pickers);
 					setUpShoppingList();
 				}
@@ -229,11 +230,8 @@ public class Shopping extends Activity {
 		int[] to = new int[] {R.id.recipeName};
 		SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, R.layout.row_check_box, calendar, from, to);
 
-		aAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, shoppingList);
-		aAdapter.setNotifyOnChange(true);
-
 		list.setVisibility(View.VISIBLE);
-		list.setAdapter(aAdapter);
+		list.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, shoppingList));
 	}
 
 	private void setPickerDate(){
@@ -265,14 +263,6 @@ public class Shopping extends Activity {
 	}
 
 	private void clearShoppingList(){
-		/*	int count = list.getAdapter().getCount();
-		for (int i = 0; i < count; i++) {
-			if (list.isItemChecked(i)) {
-				list.getCount();
-				System.out.println(shoppingList.get(i-1));
-			}
-		}*/
-
 		ArrayList<String> temp = new ArrayList<String>();
 		SparseBooleanArray a = list.getCheckedItemPositions();
 		for(int i = 0; i < shoppingList.size() ; i++)
