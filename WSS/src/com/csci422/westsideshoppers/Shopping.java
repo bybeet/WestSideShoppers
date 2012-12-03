@@ -5,13 +5,14 @@ import java.util.Date;
 
 import android.app.ListActivity;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.widget.SimpleCursorAdapter;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
 public class Shopping extends ListActivity {
@@ -63,7 +64,7 @@ public class Shopping extends ListActivity {
 				if(startSpinner.getSpinnersShown()){
 					setDate.setText(R.string.set_date_range);
 					dateRange.setVisibility(View.GONE);
-					list.setVisibility(View.GONE);
+					//list.setVisibility(View.GONE);
 				}
 				else {
 					setDate.setText(R.string.show_date_pickers);
@@ -72,9 +73,13 @@ public class Shopping extends ListActivity {
 			}
 			
 		});
-
-		
-
+	}
+	
+	@Override
+	public void onDestroy(){
+		super.onDestroy();
+		calHelper.close();
+		recipeHelper.close();
 	}
 	
 	private void setUpShoppingList(){
@@ -87,13 +92,14 @@ public class Shopping extends ListActivity {
 			calendar.close();
 		}
 		
-		calendar = calHelper.getById(beginDate);
+		calendar = calHelper.getByDate(endDate);
+		startManagingCursor(calendar);
 		
-		String[] from = {"recipe"};
-		int[] to = {R.id.recipeName};
+		String[] from = new String[] {"recipe"};
+		int[] to = new int[] {R.id.recipeName};
 		SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, R.layout.row_check_box, calendar, from, to);
 		
-		list.setVisibility(View.VISIBLE);
+		//list.setVisibility(View.VISIBLE);
 		list.setAdapter(adapter);
 	}
 	

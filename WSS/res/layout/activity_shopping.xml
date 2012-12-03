@@ -4,15 +4,6 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    <ScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent" >
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" >
-
             <DatePicker
                 android:id="@+id/begin_date"
                 android:layout_width="match_parent"
@@ -37,13 +28,10 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:visibility="gone" />
-        </LinearLayout>
-    </ScrollView>
 
     <ListView
         android:id="@+id/list"
         android:layout_width="match_parent"
-        android:layout_height="0px"
-        android:layout_weight="1" />
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>
