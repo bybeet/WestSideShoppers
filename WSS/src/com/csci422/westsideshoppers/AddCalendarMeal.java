@@ -38,7 +38,6 @@ public class AddCalendarMeal extends ListActivity{
 		somethingSelected = false;
 		Intent i = getIntent();
 		date = i.getStringExtra(Calendar.DATE_ID);
-		System.out.println(date);
 		
 		recipeHelper = new RecipeHelper(this);
 		calHelper = new  CalendarHelper(this);

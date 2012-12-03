@@ -215,7 +215,7 @@ public class Shopping extends Activity {
 			SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yy");
 			try {
 				bday = sdf.parse(stringDate(startSpinner));
-				System.out.println(bday);
+				//System.out.println(bday);
 				fday = sdf.parse(stringDate(endSpinner));
 			} catch (ParseException e1) {
 				// TODO Auto-generated catch block
@@ -224,13 +224,13 @@ public class Shopping extends Activity {
 			//iterate over rows
 			for (int i = 0; i < calendar.getCount(); i++) {
 				try{
-					System.out.println(sdf.parse(calHelper.getDate(calendar)));
+					//System.out.println(sdf.parse(calHelper.getDate(calendar)));
 
-					System.out.println(bday.compareTo(sdf.parse(calHelper.getDate(calendar))));
-					System.out.println(fday.compareTo(sdf.parse(calHelper.getDate(calendar))));
+					//System.out.println(bday.compareTo(sdf.parse(calHelper.getDate(calendar))));
+					//System.out.println(fday.compareTo(sdf.parse(calHelper.getDate(calendar))));
 				if(bday.compareTo(sdf.parse(calHelper.getDate(calendar))) <= 0 && fday.compareTo(sdf.parse(calHelper.getDate(calendar))) >= 0){
 					recipe = recipeHelper.getByRecipeName(calHelper.getRecipe(calendar));
-					System.out.println("Passed comparison");
+					//System.out.println("Passed comparison");
 					recipe.moveToFirst();
 
 					for( int j = 1; j < 4; j++ ){
@@ -240,7 +240,7 @@ public class Shopping extends Activity {
 					}
 				}
 				else
-					System.out.println("Failed comparison");
+					continue;
 				}catch (Exception e){
 					Log.e("Date Parsing", "Something went wrong with shopping list date iteration");
 					e.printStackTrace();
@@ -286,9 +286,6 @@ public class Shopping extends Activity {
 	}
 
 	private void clearShoppingList(){
-		System.out.println("Clear");
-		
-		ArrayList<Integer> temp = new ArrayList<Integer>();
 		SparseBooleanArray checked = list.getCheckedItemPositions();
 
 		for (int i = checked.size(); i >= 0; i--){
@@ -297,12 +294,7 @@ public class Shopping extends Activity {
 		    else
 		        continue;
 		}
-		
-		//System.out.println(temp.toString());
-		//for(int i = temp.size()-1; i >= 0; i--){
-		//	shoppingList.remove((int)temp.get(i));
-		//}
-		
+
 		list.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, shoppingList));
 
 	}
