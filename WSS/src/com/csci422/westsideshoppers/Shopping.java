@@ -10,6 +10,7 @@ import android.content.DialogInterface;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.text.Editable;
+import android.util.SparseBooleanArray;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -33,6 +34,7 @@ public class Shopping extends Activity {
 
 	private RecipeHelper recipeHelper;
 	private CalendarHelper calHelper;
+	private ArrayAdapter<String> aAdapter;
 
 	private TextView dateRange;
 
@@ -81,6 +83,7 @@ public class Shopping extends Activity {
 			}
 
 		});
+		clearList.setVisibility(View.GONE);
 
 		recipeHelper = new RecipeHelper(this);
 		calHelper = new CalendarHelper(this);
@@ -215,7 +218,8 @@ public class Shopping extends Activity {
 		int[] to = new int[] {R.id.recipeName};
 		SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, R.layout.row_check_box, calendar, from, to);
 
-		ArrayAdapter<String> aAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, shoppingList);
+		aAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, shoppingList);
+		aAdapter.setNotifyOnChange(true);
 
 		list.setVisibility(View.VISIBLE);
 		list.setAdapter(aAdapter);
@@ -250,13 +254,31 @@ public class Shopping extends Activity {
 	}
 
 	private void clearShoppingList(){
-		int count = this.list.getAdapter().getCount();
+	/*	int count = list.getAdapter().getCount();
 		for (int i = 0; i < count; i++) {
-			if (this.list.isItemChecked(i)) {
-				shoppingList.remove(i);
+			if (list.isItemChecked(i)) {
+				list.getCount();
+				System.out.println(shoppingList.get(i-1));
 			}
+		}*/
+
+		ArrayList<String> temp = new ArrayList<String>();
+		SparseBooleanArray a = list.getCheckedItemPositions();
+		for(int i = 0; i < shoppingList.size() ; i++)
+        {
+            if (a.valueAt(i))
+            {
+           	
+               temp.add(shoppingList.get(i));
+               
+            }
+        }
+		for(String s: temp){
+			shoppingList.remove(s);
 		}
 
+		list.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, shoppingList));
+		
 		System.out.println("Clear");
 	}
 }

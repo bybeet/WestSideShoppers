@@ -36,19 +36,19 @@
         android:visibility="gone" />
 
     <Button
-        android:id="@+id/clear_list"
-        android:layout_width="match_parent"
-        android:layout_height="78dp"
-        android:layout_marginBottom="20dp"
-        android:layout_marginTop="20dp"
-        android:text="@string/clear_shopping_list" />
-
-    <Button
         android:id="@+id/add_item"
         android:layout_width="match_parent"
         android:layout_height="78dp"
         android:layout_marginBottom="20dp"
         android:layout_marginTop="20dp"
         android:text="@string/add_item" />
+
+    <Button
+        android:id="@+id/clear_list"
+        android:layout_width="match_parent"
+        android:layout_height="78dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/clear_shopping_list" />
 
 </LinearLayout>
