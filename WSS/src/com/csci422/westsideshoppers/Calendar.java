@@ -37,6 +37,7 @@ public class Calendar extends Activity {
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_calendar);
+		invalidateOptionsMenu();
 
 		LinearLayout layout = (LinearLayout)findViewById(R.id.calendar_layout);
 
@@ -108,14 +109,6 @@ public class Calendar extends Activity {
 		super.onDestroy();
 		calHelper.close();
 		recipeHelper.close();
-	}
-	
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-	    if(getParent() != null) {
-	        return getParent().onCreateOptionsMenu(menu);
-	    }
-	    return false;
 	}
 	
 	@Override

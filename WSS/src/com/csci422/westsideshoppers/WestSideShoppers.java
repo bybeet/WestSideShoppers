@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.widget.TabHost;
+import android.widget.TabHost.OnTabChangeListener;
 
 @SuppressWarnings("deprecation")
 public class WestSideShoppers extends TabActivity {
@@ -24,19 +25,15 @@ public class WestSideShoppers extends TabActivity {
 		tabHost.addTab(tabHost.newTabSpec("Calendar").setIndicator("Calendar").setContent(new Intent(this, Calendar.class)));
 		tabHost.addTab(tabHost.newTabSpec("Shopping").setIndicator("Shopping").setContent(new Intent(this, Shopping.class)));
 		tabHost.addTab(tabHost.newTabSpec("Recipes").setIndicator("Recipes").setContent(new Intent(this, Recipes.class)));
+		
+		tabHost.setOnTabChangedListener(new OnTabChangeListener() {
+			
+			@Override
+			public void onTabChanged(String tabId) {
+				invalidateOptionsMenu();
+			}
+		});
 
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu){
-		menu.clear();
-		MenuInflater inflater = getMenuInflater();
-		int tab = getTabHost().getCurrentTab();
-		if (tab == 0)
-			inflater.inflate(R.menu.menu_calendar, menu); 
-		else if (tab == 1)
-			inflater.inflate(R.menu.menu_shopping, menu); 
-		return true;
 	}
 
 	@Override
@@ -55,4 +52,5 @@ public class WestSideShoppers extends TabActivity {
 		}
 		return false;
 	}
+	
 }

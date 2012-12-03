@@ -47,7 +47,8 @@ public class Shopping extends Activity {
 	public void onCreate(Bundle savedInstanceBundle){
 		super.onCreate(savedInstanceBundle);
 		setContentView(R.layout.activity_shopping);
-
+		invalidateOptionsMenu();
+		
 		dateRange = (TextView)findViewById(R.id.dateRange);
 
 		list = (ListView)findViewById(R.id.list);
@@ -97,14 +98,6 @@ public class Shopping extends Activity {
 			}
 
 		});
-	}
-	
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-	    if(getParent() != null) {
-	        return getParent().onCreateOptionsMenu(menu);
-	    }
-	    return false;
 	}
 	
 	@Override
