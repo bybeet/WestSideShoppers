@@ -53,40 +53,6 @@ public class AddCalendarMeal extends ListActivity{
 		calHelper.close();
 	}
 	
-	private void populateSpinner(){
-		if(recipes != null){
-			stopManagingCursor(recipes);
-			recipes.close();
-		}
-		
-		recipes = recipeHelper.getAll();
-		startManagingCursor(recipes);
-		
-		String[] columns = {"name", "type"};
-		int[] to = new int[] {R.id.recipeName , R.id.mealType};
-		
-		SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, R.layout.row, recipes, columns, to);
-		adapter.setDropDownViewResource(R.layout.row);
-		spinner.setAdapter(adapter);
-		
-		spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
-			
-			public void onNothingSelected(AdapterView<?> parent){
-				
-			}
-
-			@Override
-			public void onItemSelected(AdapterView<?> arg0, View arg1, int pos, long id) {
-				somethingSelected = true;
-				recipes = (Cursor)spinner.getItemAtPosition(pos);
-				recipeName = recipeHelper.getName(recipes);
-				Log.v("Spinner", recipeHelper.getName(recipes));
-			}
-		
-		});
-	}
-
-	
 	@Override
 	public void onListItemClick(ListView list, View view, int position, long id) {
 		if(recipes != null){
@@ -97,7 +63,6 @@ public class AddCalendarMeal extends ListActivity{
 		recipes = recipeHelper.getById(String.valueOf(id));
 		startManagingCursor(recipes);
 		recipes.moveToFirst();
-		Log.v("onListClick", recipes.toString());
 		
 		calHelper.insert(date, recipeHelper.getName(recipes));
 		finish();

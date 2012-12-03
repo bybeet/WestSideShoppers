@@ -20,7 +20,7 @@
     <string name="save_edited_recipe">Save Edited Recipe</string>
     <string name="edit_recipe">Edit Recipe</string>
     <string name="cancel_edit_recipe">Press the back button to undo modifications to the recipe.</string>
-    <string name="set_date_range">Set Date Range</string>
+    <string name="set_date_range">Show Ingredients</string>
     <string name="show_date_pickers">Show Date Pickers</string>
 
 </resources>
