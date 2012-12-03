@@ -4,20 +4,23 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import android.app.AlertDialog;
 import android.app.ListActivity;
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class Shopping extends ListActivity {
 
@@ -75,20 +78,63 @@ public class Shopping extends ListActivity {
 
 			@Override
 			public void onClick(View v) {
+				if(endSpinner.getCalendarView().getDate() <= startSpinner.getCalendarView().getDate()){
+					AlertDialog.Builder alert = new AlertDialog.Builder(Shopping.this);
+					alert.setNegativeButton("Okay", new DialogInterface.OnClickListener() {
+
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							
+						}
+					})
+					.setMessage(R.string.end_date_in_past)
+					.setCancelable(true)
+					.show();
+					return;
+				}
+				
 				startSpinner.setSpinnersShown ( !startSpinner.getSpinnersShown());
 				endSpinner.setSpinnersShown ( !endSpinner.getSpinnersShown());
+				
 				if(startSpinner.getSpinnersShown()){
 					setDate.setText(R.string.set_date_range);
 					dateRange.setVisibility(View.GONE);
 					list.setVisibility(View.GONE);
 				}
 				else {
+					
 					setDate.setText(R.string.show_date_pickers);
 					setUpShoppingList();
 				}
 			}
 
 		});
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+	    if (getParent() != null) 
+	    {
+	        return getParent().onCreateOptionsMenu(menu);
+	    }
+		new MenuInflater(this).inflate(R.menu.menu_shopping, menu);
+		return (super.onCreateOptionsMenu(menu));
+	}
+
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		if(item.getItemId() == R.id.clear) {
+			Toast.makeText(this, "Clear", Toast.LENGTH_SHORT);
+			return true;
+		}
+		if(item.getItemId() == R.id.addItem){
+			Toast.makeText(this, "Add", Toast.LENGTH_SHORT);
+			return true;
+		}
+
+		return (super.onOptionsItemSelected(item));
+
 	}
 
 	@Override
