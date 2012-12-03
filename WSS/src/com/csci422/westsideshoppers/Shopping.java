@@ -1,5 +1,6 @@
 package com.csci422.westsideshoppers;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -10,6 +11,7 @@ import android.content.DialogInterface;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.text.Editable;
+import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -207,11 +209,25 @@ public class Shopping extends Activity {
 			//more to the first row
 			calendar.moveToFirst();
 
+			Date bday = new Date();
+			Date fday = new Date();
+
+			SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yy");
+			try {
+				bday = sdf.parse(stringDate(startSpinner));
+				System.out.println(bday);
+				fday = sdf.parse(stringDate(endSpinner));
+			} catch (ParseException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			//iterate over rows
 			for (int i = 0; i < calendar.getCount(); i++) {
-				if(calHelper.getDate(calendar).equals(beginDate) || calHelper.getDate(calendar).equals(endDate)){
+				try{
+					System.out.println(bday.compareTo(sdf.parse(calHelper.getDate(calendar))));
+				if(bday.compareTo(sdf.parse(calHelper.getDate(calendar))) >= 0 && fday.compareTo(sdf.parse(calHelper.getDate(calendar))) <= 0){
 					recipe = recipeHelper.getByRecipeName(calHelper.getRecipe(calendar));
-
+					System.out.println("Passed comparison");
 					recipe.moveToFirst();
 
 					for( int j = 1; j < 4; j++ ){
@@ -220,7 +236,12 @@ public class Shopping extends Activity {
 						}
 					}
 				}
-
+				}catch (Exception e){
+					Log.e("Date Parsing", "Something went wrong with shopping list date iteration");
+					e.printStackTrace();
+				}
+				
+				System.out.println(calHelper.getDate(calendar));
 				calendar.moveToNext();
 			}
 		}
@@ -263,19 +284,17 @@ public class Shopping extends Activity {
 	}
 
 	private void clearShoppingList(){
-		ArrayList<String> temp = new ArrayList<String>();
+		ArrayList<Integer> temp = new ArrayList<Integer>();
 		SparseBooleanArray a = list.getCheckedItemPositions();
 		for(int i = 0; i < shoppingList.size() ; i++)
 		{
 			if (a.valueAt(i))
 			{
-
-				temp.add(shoppingList.get(i));
-
+				temp.add(i);
 			}
 		}
-		for(String s: temp){
-			shoppingList.remove(s);
+		for(int i = temp.size()-1; i >= 0; i--){
+			shoppingList.remove((int)temp.get(i));
 		}
 
 		list.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, shoppingList));

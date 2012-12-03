@@ -38,6 +38,7 @@ public class AddCalendarMeal extends ListActivity{
 		somethingSelected = false;
 		Intent i = getIntent();
 		date = i.getStringExtra(Calendar.DATE_ID);
+		System.out.println(date);
 		
 		recipeHelper = new RecipeHelper(this);
 		calHelper = new  CalendarHelper(this);
@@ -85,41 +86,4 @@ public class AddCalendarMeal extends ListActivity{
 		setListAdapter(adapter);
 	}
 	
-	/*
-	class RecipeAdapter extends CursorAdapter {
-		RecipeAdapter(Cursor c){
-			super(AddCalendarMeal.this, c);
-		}
-		
-		@Override
-		public void bindView(View row, Context ctxt, Cursor c) {
-			RecipeHolder holder = (RecipeHolder)row.getTag();
-			holder.populateFrom(c, recipeHelper);
-		}
-		
-		@Override
-		public View newView(Context ctxt, Cursor c, ViewGroup parent){
-			LayoutInflater inflater = getLayoutInflater();
-			View row = inflater.inflate(R.layout.row, parent, false);
-			RecipeHolder holder = new RecipeHolder(row);
-			row.setTag(holder);
-			return row;
-		}
-	}
-	
-	static class RecipeHolder {
-		private TextView name;
-		private TextView mealType;
-		
-		RecipeHolder (View row){
-			name = (TextView)row.findViewById(R.id.recipeName);
-			mealType = (TextView)row.findViewById(R.id.mealType);
-		}
-		
-		void populateFrom(Cursor c, RecipeHelper helper){
-			mealType.setText(helper.getType(c));
-			name.setText(helper.getName(c));
-		}
-	}
-	*/
 }
