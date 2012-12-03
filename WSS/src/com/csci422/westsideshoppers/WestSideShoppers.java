@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.TabHost;
+import android.widget.Toast;
 import android.widget.TabHost.OnTabChangeListener;
 
 @SuppressWarnings("deprecation")
@@ -34,6 +36,11 @@ public class WestSideShoppers extends TabActivity {
 			}
 		});
 
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		return false;
 	}
 
 	@Override

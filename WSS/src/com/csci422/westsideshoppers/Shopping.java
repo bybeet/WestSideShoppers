@@ -101,6 +101,14 @@ public class Shopping extends Activity {
 	}
 	
 	@Override
+	public boolean onCreateOptionsMenu(Menu menu){
+		if(getParent() != null) {
+	        return getParent().onPrepareOptionsMenu(menu);
+	    }
+	    return false;
+	}
+	
+	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) {
 	    if(getParent() != null) {
 	        return getParent().onPrepareOptionsMenu(menu);
@@ -112,14 +120,13 @@ public class Shopping extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if(item.getItemId() == R.id.clear) {
 			Toast.makeText(this, "Clear", Toast.LENGTH_SHORT).show();
-			return true;
 		}
 		if(item.getItemId() == R.id.addItem){
 			Toast.makeText(this, "Add", Toast.LENGTH_SHORT).show();
-			return true;
+			System.out.println("Add");
 		}
-
-		return false;
+		
+		return super.onOptionsItemSelected(item);
 	}
 
 	@Override
@@ -190,5 +197,9 @@ public class Shopping extends Activity {
 	private String stringDate(DatePicker picker){
 		Date df = new Date(picker.getCalendarView().getDate());
 		return new SimpleDateFormat("MM/dd/yy").format(df);
+	}
+	
+	private void addItem(){
+		System.out.println("Add item");
 	}
 }
