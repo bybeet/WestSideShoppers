@@ -34,17 +34,14 @@ public class Shopping extends Activity {
 
 	private RecipeHelper recipeHelper;
 	private CalendarHelper calHelper;
-<<<<<<< HEAD
-	
+
 	private TextView startLabel;
 	private TextView endLabel;
-	
-=======
+
 	private ArrayAdapter<String> aAdapter;
 
 	private TextView dateRange;
 
->>>>>>> Shopping
 	private DatePicker startSpinner;
 	private DatePicker endSpinner;
 
@@ -63,15 +60,13 @@ public class Shopping extends Activity {
 	public void onCreate(Bundle savedInstanceBundle){
 		super.onCreate(savedInstanceBundle);
 		setContentView(R.layout.activity_shopping);
-<<<<<<< HEAD
-		
+
 		startLabel = (TextView)findViewById(R.id.begin_date_label);
 		endLabel = (TextView)findViewById(R.id.end_date_label);
-		
+
 		startLabel.setText("Start list with:");
 		endLabel.setText("End list with:");
-		
-=======
+
 		invalidateOptionsMenu();
 
 		dateRange = (TextView)findViewById(R.id.dateRange);
@@ -104,7 +99,6 @@ public class Shopping extends Activity {
 		recipeHelper = new RecipeHelper(this);
 		calHelper = new CalendarHelper(this);
 
->>>>>>> Shopping
 		startSpinner = (DatePicker)findViewById(R.id.begin_date);
 		startSpinner.setCalendarViewShown(false);
 		endSpinner = (DatePicker)findViewById(R.id.end_date);
@@ -178,8 +172,6 @@ public class Shopping extends Activity {
 
 		return super.onOptionsItemSelected(item);
 	}
-<<<<<<< HEAD
-=======
 
 	@Override
 	public void onDestroy(){
@@ -273,7 +265,7 @@ public class Shopping extends Activity {
 	}
 
 	private void clearShoppingList(){
-	/*	int count = list.getAdapter().getCount();
+		/*	int count = list.getAdapter().getCount();
 		for (int i = 0; i < count; i++) {
 			if (list.isItemChecked(i)) {
 				list.getCount();
@@ -284,21 +276,20 @@ public class Shopping extends Activity {
 		ArrayList<String> temp = new ArrayList<String>();
 		SparseBooleanArray a = list.getCheckedItemPositions();
 		for(int i = 0; i < shoppingList.size() ; i++)
-        {
-            if (a.valueAt(i))
-            {
-           	
-               temp.add(shoppingList.get(i));
-               
-            }
-        }
+		{
+			if (a.valueAt(i))
+			{
+
+				temp.add(shoppingList.get(i));
+
+			}
+		}
 		for(String s: temp){
 			shoppingList.remove(s);
 		}
 
 		list.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, shoppingList));
-		
+
 		System.out.println("Clear");
 	}
->>>>>>> Shopping
 }

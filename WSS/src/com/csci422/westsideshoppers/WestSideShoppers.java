@@ -24,15 +24,11 @@ public class WestSideShoppers extends TabActivity {
 		tabHost = getTabHost();
 
 		// Add tabs
-<<<<<<< HEAD
+
 		tabHost.addTab(tabHost.newTabSpec("Meal Planner").setIndicator("Meal Planner").setContent(new Intent(this, Calendar.class)));
 		tabHost.addTab(tabHost.newTabSpec("Shopping List").setIndicator("Shopping List").setContent(new Intent(this, Shopping.class)));
 		tabHost.addTab(tabHost.newTabSpec("Recipe Editor").setIndicator("Recipe Editor").setContent(new Intent(this, Recipes.class)));
-=======
-		tabHost.addTab(tabHost.newTabSpec("Calendar").setIndicator("Calendar").setContent(new Intent(this, Calendar.class)));
-		tabHost.addTab(tabHost.newTabSpec("Shopping").setIndicator("Shopping").setContent(new Intent(this, Shopping.class)));
-		tabHost.addTab(tabHost.newTabSpec("Recipes").setIndicator("Recipes").setContent(new Intent(this, Recipes.class)));
-		
+	
 		tabHost.setOnTabChangedListener(new OnTabChangeListener() {
 			
 			@Override
@@ -40,7 +36,6 @@ public class WestSideShoppers extends TabActivity {
 				invalidateOptionsMenu();
 			}
 		});
->>>>>>> Shopping
 
 	}
 	
