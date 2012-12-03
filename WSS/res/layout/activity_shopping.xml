@@ -1,11 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
 
-    <LinearLayout
-        android:layout_width="fill_parent"
+    <DatePicker
+        android:id="@+id/begin_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <DatePicker
+        android:id="@+id/end_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/setList"
+        android:layout_width="match_parent"
+        android:layout_height="78dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/set_date_range" />
+
+    <TextView
+        android:id="@+id/dateRange"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
+        android:visibility="gone" />
+
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+<<<<<<< HEAD
         android:orientation="vertical" >
         
         <TextView
@@ -42,3 +70,24 @@
     </LinearLayout>
 
 </ScrollView>
+=======
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/add_item"
+        android:layout_width="match_parent"
+        android:layout_height="78dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/add_item" />
+
+    <Button
+        android:id="@+id/clear_list"
+        android:layout_width="match_parent"
+        android:layout_height="78dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/clear_shopping_list" />
+
+</LinearLayout>
+>>>>>>> Shopping
