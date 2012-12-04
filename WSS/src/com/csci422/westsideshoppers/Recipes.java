@@ -1,5 +1,7 @@
 package com.csci422.westsideshoppers;
 
+import java.util.ArrayList;
+
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.Context;
@@ -21,10 +23,13 @@ import android.widget.TextView;
 public class Recipes extends ListActivity {
 	
 	public final static String ID_EXTRA = "com.csci422.westsideshoppers._ID";
+	public final static String INGREDIENTS_LIST = "com.csci422.westsideshoppers._INGREDIENTS";
 	
 	private Cursor recipes;
 	private RecipeHelper helper;
 	private RecipeAdapter adapter;
+	
+	private static ArrayList<String> ingredients;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceBundle){
@@ -33,6 +38,8 @@ public class Recipes extends ListActivity {
 		
 		helper = new RecipeHelper(this);
 		
+		ingredients = new ArrayList<String>();
+		
 		Button btn = (Button)findViewById(R.id.addRecipe);
 		btn.setOnClickListener(new OnClickListener() {
 			
@@ -40,6 +47,7 @@ public class Recipes extends ListActivity {
 			@Override
 			public void onClick(View v) {
 				Intent i = new Intent(Recipes.this, com.csci422.westsideshoppers.AddRecipe.class);
+				i.putStringArrayListExtra(INGREDIENTS_LIST, ingredients);
 				startActivity(i);
 			}
 		});
@@ -138,7 +146,12 @@ public class Recipes extends ListActivity {
 			mealType.setText(helper.getType(c));
 			name.setText(helper.getName(c));
 			//Log.e("Recipe List", helper.getType(c));
-			
+			for( int j = 1; j < 4; j++ ){
+				if(helper.getIngredient(c, j).length() > 0){
+					//ingredients.add(helper.getIngredient(c));
+					ingredients.add(helper.getIngredient(c, j));
+				}
+			}
 		}
 	}
 
