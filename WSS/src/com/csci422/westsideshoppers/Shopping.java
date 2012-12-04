@@ -123,20 +123,57 @@ public class Shopping extends Activity {
 					return;
 				}
 
-				startSpinner.setSpinnersShown ( !startSpinner.getSpinnersShown());
-				endSpinner.setSpinnersShown ( !endSpinner.getSpinnersShown());
+				if(!startSpinner.getSpinnersShown()){
+					if(list.getCount()>0){
+						AlertDialog.Builder alert = new AlertDialog.Builder(Shopping.this);
+						alert.setPositiveButton("Okay", new DialogInterface.OnClickListener() {
 
-				if(startSpinner.getSpinnersShown()){
-					setDate.setText(R.string.set_date_range);
-					dateRange.setVisibility(View.GONE);
-					list.setVisibility(View.GONE);
-					addItem.setVisibility(View.GONE);
-					clearList.setVisibility(View.GONE);
-					startLabel.setVisibility(View.VISIBLE);
-					endLabel.setVisibility(View.VISIBLE);
-					shoppingList.clear();
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								startSpinner.setSpinnersShown ( !startSpinner.getSpinnersShown());
+								endSpinner.setSpinnersShown ( !endSpinner.getSpinnersShown());
+
+								setDate.setText(R.string.set_date_range);
+								dateRange.setVisibility(View.GONE);
+								list.setVisibility(View.GONE);
+								addItem.setVisibility(View.GONE);
+								clearList.setVisibility(View.GONE);
+								startLabel.setVisibility(View.VISIBLE);
+								endLabel.setVisibility(View.VISIBLE);
+								shoppingList.clear();
+							}
+						})
+						.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+
+							}
+						})
+						.setMessage(R.string.clearing_list)
+						.setCancelable(true)
+						.show();
+					}
+					else
+					{
+						startSpinner.setSpinnersShown ( !startSpinner.getSpinnersShown());
+						endSpinner.setSpinnersShown ( !endSpinner.getSpinnersShown());
+
+						setDate.setText(R.string.set_date_range);
+						dateRange.setVisibility(View.GONE);
+						list.setVisibility(View.GONE);
+						addItem.setVisibility(View.GONE);
+						clearList.setVisibility(View.GONE);
+						startLabel.setVisibility(View.VISIBLE);
+						endLabel.setVisibility(View.VISIBLE);
+						shoppingList.clear();
+					}
 				}
-				else {
+				else{
+					startSpinner.setSpinnersShown ( !startSpinner.getSpinnersShown());
+					endSpinner.setSpinnersShown ( !endSpinner.getSpinnersShown());
+
+
 					startLabel.setVisibility(View.GONE);
 					endLabel.setVisibility(View.GONE);
 					setDate.setText(R.string.show_date_pickers);
@@ -228,19 +265,19 @@ public class Shopping extends Activity {
 
 					//System.out.println(bday.compareTo(sdf.parse(calHelper.getDate(calendar))));
 					//System.out.println(fday.compareTo(sdf.parse(calHelper.getDate(calendar))));
-				if(bday.compareTo(sdf.parse(calHelper.getDate(calendar))) <= 0 && fday.compareTo(sdf.parse(calHelper.getDate(calendar))) >= 0){
-					recipe = recipeHelper.getByRecipeName(calHelper.getRecipe(calendar));
-					//System.out.println("Passed comparison");
-					recipe.moveToFirst();
+					if(bday.compareTo(sdf.parse(calHelper.getDate(calendar))) <= 0 && fday.compareTo(sdf.parse(calHelper.getDate(calendar))) >= 0){
+						recipe = recipeHelper.getByRecipeName(calHelper.getRecipe(calendar));
+						//System.out.println("Passed comparison");
+						recipe.moveToFirst();
 
-					for( int j = 1; j < 4; j++ ){
-						if(recipeHelper.getIngredient(recipe, j).length() > 0){
-							shoppingList.add(recipeHelper.getIngredient(recipe, j));
+						for( int j = 1; j < 4; j++ ){
+							if(recipeHelper.getIngredient(recipe, j).length() > 0){
+								shoppingList.add(recipeHelper.getIngredient(recipe, j));
+							}
 						}
 					}
-				}
-				else
-					continue;
+					else
+						continue;
 				}catch (Exception e){
 					Log.e("Date Parsing", "Something went wrong with shopping list date iteration");
 					e.printStackTrace();
@@ -252,7 +289,7 @@ public class Shopping extends Activity {
 
 		System.out.println(shoppingList.toString());
 		ArrayAdapter<String> aAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, shoppingList);
-		
+
 		list.setVisibility(View.VISIBLE);
 		list.setAdapter(aAdapter);
 	}
@@ -289,10 +326,10 @@ public class Shopping extends Activity {
 		SparseBooleanArray checked = list.getCheckedItemPositions();
 
 		for (int i = checked.size(); i >= 0; i--){
-		    if (checked.get(i))
-		       shoppingList.remove(i);
-		    else
-		        continue;
+			if (checked.get(i))
+				shoppingList.remove(i);
+			else
+				continue;
 		}
 
 		list.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, shoppingList));

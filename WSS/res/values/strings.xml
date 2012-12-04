@@ -25,5 +25,6 @@
     <string name="clear_shopping_list">Clear Checked Items</string>
     <string name="add_item">Add to Shopping List</string>
     <string name="end_date_in_past">It looks like your end date is in the past compared to your start date. Please change the lower date to one that is not in the past.</string>
+    <string name="clearing_list">Going back to the date spinners will clear out your list. Continue?</string>
 
 </resources>
