@@ -27,7 +27,7 @@
     <Button
         android:id="@+id/setList"
         android:layout_width="match_parent"
-        android:layout_height="78dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         android:layout_marginTop="20dp"
         android:text="@string/set_date_range" />
@@ -43,22 +43,27 @@
         android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:visibility="gone" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.60" >
 
     <Button
         android:id="@+id/add_item"
-        android:layout_width="match_parent"
-        android:layout_height="78dp"
-        android:layout_marginBottom="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:text="@string/add_item" />
 
     <Button
         android:id="@+id/clear_list"
-        android:layout_width="match_parent"
-        android:layout_height="78dp"
-        android:layout_marginBottom="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="@string/clear_shopping_list" />
+
+    </LinearLayout>
 
 </LinearLayout>
