@@ -5,15 +5,10 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.widget.SimpleCursorAdapter;
-import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.CalendarView;
 import android.widget.ListView;
 import android.widget.Spinner;
-
-import com.csci422.westsideshoppers.Recipes.RecipeAdapter;
 
 public class AddCalendarMeal extends ListActivity{
 	

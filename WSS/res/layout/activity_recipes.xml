@@ -11,6 +11,13 @@
             android:layout_marginTop="20dp"
              android:layout_marginBottom="20dp"
             android:text="@string/add_recipe" />
+        <EditText
+            android:id="@+id/search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:selectAllOnFocus="true"
+            android:hint="Search..."/>
 
     <FrameLayout
         android:layout_width="match_parent"
