@@ -21,36 +21,38 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 public class Recipes extends ListActivity {
-	
+
 	public final static String ID_EXTRA = "com.csci422.westsideshoppers._ID";
 	public final static String INGREDIENTS_LIST = "com.csci422.westsideshoppers._INGREDIENTS";
-	
+
 	private Cursor recipes;
 	private RecipeHelper helper;
 	private RecipeAdapter adapter;
-	
+
 	private ArrayList<String> ingredients;
-	
+
 	@Override
 	public void onCreate(Bundle savedInstanceBundle){
 		super.onCreate(savedInstanceBundle);
 		setContentView(R.layout.activity_recipes);
-		
+
 		helper = new RecipeHelper(this);
 		ingredients = new ArrayList<String>();
-		
+
 		Button btn = (Button)findViewById(R.id.addRecipe);
 		btn.setOnClickListener(new OnClickListener() {
-			
+
 			//Call the add/create recipe screen.
 			@Override
 			public void onClick(View v) {
 				Intent i = new Intent(Recipes.this, com.csci422.westsideshoppers.AddRecipe.class);
 				i.putStringArrayListExtra(INGREDIENTS_LIST, ingredients);
-				startActivity(i);
+				if( ingredients != null)
+					System.out.println(ingredients.toString());
+				startActivityForResult(i, 100);
 			}
 		});
-		
+
 		ListView lv = getListView();
 		lv.setOnItemLongClickListener(new OnItemLongClickListener(){
 
@@ -70,7 +72,7 @@ public class Recipes extends ListActivity {
 
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						
+
 					}
 				})
 				.setCancelable(true)
@@ -80,55 +82,71 @@ public class Recipes extends ListActivity {
 
 			}
 		});
-		
+
 		initRecipeList();
 	}
-	
+
 	@Override
 	public void onDestroy () {
 		super.onDestroy();
 		helper.close();
 	}
-	
+
 	@Override
 	public void onListItemClick(ListView list, View view, int position, long id) {
 		Intent intent = new Intent(Recipes.this, AddRecipe.class);
 		intent.putExtra(ID_EXTRA, String.valueOf(id));
+		intent.putStringArrayListExtra(INGREDIENTS_LIST, ingredients);
 		startActivity(intent);
 	}
 	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data){
+		super.onActivityResult(requestCode, resultCode, data);
+		if(resultCode == 100){
+			initRecipeList();
+		}
+	}
+
 	@SuppressWarnings("deprecation")
 	private void initRecipeList(){
 		if(recipes != null){
 			stopManagingCursor(recipes);
 			recipes.close();
 		}
-		
+
 		recipes = helper.getAll();
 		startManagingCursor(recipes);
-		
+
 		adapter = new RecipeAdapter(recipes);
 		setListAdapter(adapter);
+		
+		ingredients = new ArrayList<String>();
+
+		recipes.moveToFirst();
+		for (int i = 0; i < recipes.getCount(); i++) {
+			for( int j = 1; j < 4; j++ ){
+				if(helper.getIngredient(recipes, j).length() > 0 && !ingredients.contains(helper.getIngredient(recipes, j))){
+					//ingredients.add(helper.getIngredient(c));
+					System.out.println(helper.getIngredient(recipes, j));
+					ingredients.add(helper.getIngredient(recipes, j));
+				}
+			}
+			recipes.moveToNext();
+		}
 	}
-	
+
 	class RecipeAdapter extends CursorAdapter {
 		RecipeAdapter(Cursor c){
 			super(Recipes.this, c);
 		}
-		
+
 		@Override
 		public void bindView(View row, Context ctxt, Cursor c) {
 			RecipeHolder holder = (RecipeHolder)row.getTag();
 			holder.populateFrom(c, helper);
-			c.moveToFirst();
-			for( int j = 1; j < 4; j++ ){
-				if(helper.getIngredient(c, j).length() > 0){
-					//ingredients.add(helper.getIngredient(c));
-					ingredients.add(helper.getIngredient(c, j));
-				}
-			}
 		}
-		
+
 		@Override
 		public View newView(Context ctxt, Cursor c, ViewGroup parent){
 			LayoutInflater inflater = getLayoutInflater();
@@ -138,16 +156,16 @@ public class Recipes extends ListActivity {
 			return row;
 		}
 	}
-	
+
 	static class RecipeHolder {
 		private TextView name;
 		private TextView mealType;
-		
+
 		RecipeHolder (View row){
 			name = (TextView)row.findViewById(R.id.recipeName);
 			mealType = (TextView)row.findViewById(R.id.mealType);
 		}
-		
+
 		void populateFrom(Cursor c, RecipeHelper helper){
 			mealType.setText(helper.getType(c));
 			name.setText(helper.getName(c));

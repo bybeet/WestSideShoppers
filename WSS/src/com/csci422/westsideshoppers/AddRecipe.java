@@ -12,6 +12,8 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -25,10 +27,11 @@ public class AddRecipe extends Activity{
 	TextView title;
 
 	EditText recipeName;
-	EditText ingredient1;
-	EditText ingredient2;
-	EditText ingredient3;
 	EditText direction1;
+	
+	AutoCompleteTextView ingredient1;
+	AutoCompleteTextView ingredient2;
+	AutoCompleteTextView ingredient3;
 
 	CheckBox breakfast;
 	CheckBox lunch;
@@ -48,19 +51,25 @@ public class AddRecipe extends Activity{
 		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
 		helper = new RecipeHelper(this);
+		
+		ingredient1 = (AutoCompleteTextView)findViewById(R.id.ingredient1);
+		ingredient2 = (AutoCompleteTextView)findViewById(R.id.ingredient2);
+		ingredient3 = (AutoCompleteTextView)findViewById(R.id.ingredient3);
 
-		Intent intent = getIntent();
-		ingredients = intent.getStringArrayListExtra(Recipes.INGREDIENTS_LIST);
+		Bundle extra = getIntent().getExtras();
+		
+		ingredients = extra.getStringArrayList(Recipes.INGREDIENTS_LIST);
 		if(ingredients != null){
 			System.out.println(ingredients.toString());
+			ArrayAdapter<String> ingredientsAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, ingredients);
+			ingredient1.setAdapter(ingredientsAdapter);
+			ingredient2.setAdapter(ingredientsAdapter);
+			ingredient3.setAdapter(ingredientsAdapter);
 		}	
 
 		title = (TextView)findViewById(R.id.recipeCreatorTitle);
+	
 		recipeName = (EditText)findViewById(R.id.recipeName);
-		ingredient1 = (EditText)findViewById(R.id.ingredient1);
-		ingredient2 = (EditText)findViewById(R.id.ingredient2);
-		ingredient3 = (EditText)findViewById(R.id.ingredient3);
-
 		direction1 = (EditText)findViewById(R.id.directions);
 
 		breakfast = (CheckBox)findViewById(R.id.breakfast);
@@ -139,6 +148,10 @@ public class AddRecipe extends Activity{
 		else {
 			helper.update(recipeId, recipeName.getText().toString(), mealType.toString(), ingredient1.getText().toString(), ingredient2.getText().toString(), ingredient3.getText().toString(), direction1.getText().toString());			
 		}
+		
+		Intent i = new Intent();
+		setResult(100, i);
+		
 		finish();
 	}
 
