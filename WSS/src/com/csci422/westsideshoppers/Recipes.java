@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -107,7 +108,23 @@ public class Recipes extends ListActivity {
 			initRecipeList();
 		}
 	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu){
+		if(getParent() != null) {
+			return getParent().onPrepareOptionsMenu(menu);
+		}
+		return false;
+	}
 
+	@Override
+	public boolean onPrepareOptionsMenu(Menu menu) {
+		if(getParent() != null) {
+			return getParent().onPrepareOptionsMenu(menu);
+		}
+		return false;
+	}
+	
 	@SuppressWarnings("deprecation")
 	private void initRecipeList(){
 		if(recipes != null){

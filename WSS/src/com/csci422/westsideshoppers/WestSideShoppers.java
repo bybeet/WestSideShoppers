@@ -57,6 +57,9 @@ public class WestSideShoppers extends TabActivity {
 			System.out.println("shop");
 			inflate.inflate(R.menu.menu_shopping, menu);
 			return true;
+		case 2:
+			inflate.inflate(R.menu.menu_recipe, menu);
+			return true;
 		}
 		return false;
 	}
