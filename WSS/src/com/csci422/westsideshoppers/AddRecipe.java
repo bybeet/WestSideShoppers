@@ -1,8 +1,11 @@
 package com.csci422.westsideshoppers;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,7 +17,6 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class AddRecipe extends Activity{
 
@@ -36,6 +38,8 @@ public class AddRecipe extends Activity{
 
 	String recipeId;
 
+	ArrayList<String> ingredients;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
@@ -44,6 +48,12 @@ public class AddRecipe extends Activity{
 		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
 		helper = new RecipeHelper(this);
+
+		Intent intent = getIntent();
+		ingredients = intent.getStringArrayListExtra(Recipes.INGREDIENTS_LIST);
+		if(ingredients != null){
+			System.out.println(ingredients.toString());
+		}	
 
 		title = (TextView)findViewById(R.id.recipeCreatorTitle);
 		recipeName = (EditText)findViewById(R.id.recipeName);

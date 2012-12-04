@@ -29,7 +29,7 @@ public class Recipes extends ListActivity {
 	private RecipeHelper helper;
 	private RecipeAdapter adapter;
 	
-	private static ArrayList<String> ingredients;
+	private ArrayList<String> ingredients;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceBundle){
@@ -37,7 +37,6 @@ public class Recipes extends ListActivity {
 		setContentView(R.layout.activity_recipes);
 		
 		helper = new RecipeHelper(this);
-		
 		ingredients = new ArrayList<String>();
 		
 		Button btn = (Button)findViewById(R.id.addRecipe);
@@ -121,6 +120,13 @@ public class Recipes extends ListActivity {
 		public void bindView(View row, Context ctxt, Cursor c) {
 			RecipeHolder holder = (RecipeHolder)row.getTag();
 			holder.populateFrom(c, helper);
+			c.moveToFirst();
+			for( int j = 1; j < 4; j++ ){
+				if(helper.getIngredient(c, j).length() > 0){
+					//ingredients.add(helper.getIngredient(c));
+					ingredients.add(helper.getIngredient(c, j));
+				}
+			}
 		}
 		
 		@Override
@@ -146,12 +152,6 @@ public class Recipes extends ListActivity {
 			mealType.setText(helper.getType(c));
 			name.setText(helper.getName(c));
 			//Log.e("Recipe List", helper.getType(c));
-			for( int j = 1; j < 4; j++ ){
-				if(helper.getIngredient(c, j).length() > 0){
-					//ingredients.add(helper.getIngredient(c));
-					ingredients.add(helper.getIngredient(c, j));
-				}
-			}
 		}
 	}
 
